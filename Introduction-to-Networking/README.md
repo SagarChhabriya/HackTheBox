@@ -130,3 +130,23 @@ These terms provide a broader understanding of network types, although they may 
 - **WPAN**: A wireless version of a PAN, utilizing technologies like Bluetooth or Wireless USB. It is suitable for connecting devices within a few meters and is used in IoT applications for smart home and automation tasks.
 
 By understanding these network types and their characteristics, you can better manage network infrastructure and address specific needs related to connectivity and security.
+
+
+
+# CDN vs Proxy vs Load Balancer vs POP
+
+## What is a CDN (Content Delivery Network)?
+
+A CDN is a system of distributed servers that delivers web content (like images and videos) to users based on their geographic location. It speeds up access to content and reduces the load on the origin server by caching copies of the content at multiple locations.
+
+## What is a Proxy?
+
+A proxy server acts as an intermediary between a client and the internet. It can cache content to improve load times, filter requests to enhance security, and provide anonymity for users by masking their IP addresses.
+
+## What is a Load Balancer?
+
+A load balancer distributes incoming network or application traffic across multiple servers to ensure no single server becomes overwhelmed. This improves performance, reliability, and helps in managing high volumes of traffic by balancing the load.
+
+## What is a POP (Point of Presence)?
+
+A POP is a physical location where a network connects to other networks or where a CDN has servers to deliver content. It helps reduce latency and improve performance by bringing content closer to users.
