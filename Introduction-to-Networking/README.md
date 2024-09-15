@@ -133,7 +133,7 @@ By understanding these network types and their characteristics, you can better m
 
 
 
-# CDN vs Proxy vs Load Balancer vs POP
+# MISC: CDN vs Proxy vs Load Balancer vs POP
 
 ## What is a CDN (Content Delivery Network)?
 
@@ -150,3 +150,409 @@ A load balancer distributes incoming network or application traffic across multi
 ## What is a POP (Point of Presence)?
 
 A POP is a physical location where a network connects to other networks or where a CDN has servers to deliver content. It helps reduce latency and improve performance by bringing content closer to users.
+
+
+
+# Network Topologies
+
+## Point-to-Point
+
+The simplest network topology with a dedicated connection between two hosts is the point-to-point topology. In this topology, a direct and straightforward physical link exists only between two hosts. These two devices can use these connections for mutual communication.
+
+**Note:** Point-to-point topologies are the basic model of traditional telephony and must not be confused with P2P (Peer-to-Peer architecture).
+
+![Point-To-Point Topology](assets/3-point-to-point.png)
+
+## Bus
+
+All hosts are connected via a transmission medium in the bus topology. Every host has access to the transmission medium and the signals that are transmitted over it. There is no central network component that controls the processes on it. The transmission medium for this can be, for example, a coaxial cable.
+
+Since the medium is shared with all the others, only one host can send, and all the others can only receive and evaluate the data and see whether it is intended for itself.
+
+![Bus Topology](assets/4-but-topology.png)
+
+## Star
+
+The star topology is a network component that maintains a connection to all hosts. Each host is connected to the central network component via a separate link. This is usually a router, a hub, or a switch. These handle the forwarding function for the data packets. To do this, the data packets are received and forwarded to the destination. The data traffic on the central network component can be very high since all data and connections go through it.
+
+![Star Topology](assets/5-star-topology.png)
+
+## Ring
+
+The physical ring topology is such that each host or node is connected to the ring with two cables:
+
+- One for the incoming signals
+- Another for the outgoing ones
+
+This means that one cable arrives at each host and one cable leaves. The ring topology typically does not require an active network component. The control and access to the transmission medium are regulated by a protocol to which all stations adhere.
+
+A logical ring topology is based on a physical star topology, where a distributor at the node simulates the ring by forwarding from one port to the next.
+
+The information is transmitted in a predetermined transmission direction. Typically, the transmission medium is accessed sequentially from station to station using a retrieval system from the central station or a token. A token is a bit pattern that continually passes through a ring network in one direction, which works according to the claim token process.
+
+![Ring Topology](assets/6-rign-topology.png)
+
+## Mesh
+
+Many nodes decide about the connections on a physical level and the routing on a logical level in meshed networks. Therefore, meshed structures have no fixed topology. There are two basic structures from the basic concept: the fully meshed and the partially meshed structure.
+
+### Fully Meshed
+
+Each host is connected to every other host in the network in a fully meshed structure. This means that the hosts are meshed with each other. This technique is primarily used in WAN or MAN to ensure high reliability and bandwidth.
+
+In this setup, important network nodes such as routers could be networked together. If one router fails, the others can continue to work without problems, and the network can absorb the failure due to the many connections.
+
+Each node of a fully meshed topology has the same routing functions and knows the neighboring nodes it can communicate with proximity to the network gateway and traffic loads.
+
+### Partially Meshed
+
+In the partially meshed structure, the endpoints are connected by only one connection. In this type of network topology, specific nodes are connected to exactly one other node, and some other nodes are connected to two or more other nodes with a point-to-point connection.
+
+![Mesh Topology](assets/7-mesh-topology.png)
+
+## Tree
+
+The tree topology is an extended star topology that more extensive local networks have in this structure. This is especially useful when several topologies are combined. This topology is often used, for example, in larger company buildings.
+
+There are both logical tree structures according to the spanning tree and physical ones. Modular modern networks, based on structured cabling with a hub hierarchy, also have a tree structure. Tree topologies are also used for broadband networks and city networks (MAN).
+
+![Tree Topology](assets/8-tree-topology.png)
+
+## Hybrid
+
+Hybrid networks combine two or more topologies so that the resulting network does not present any standard topologies. For example, a tree network can represent a hybrid topology in which star networks are connected via interconnected bus networks. However, a tree network that is linked to another tree network is still topologically a tree network. A hybrid topology is always created when two different basic network topologies are interconnected.
+
+![Hybrid Topology](assets/9-hybrid-topology.png)
+
+## Daisy Chain
+
+In the daisy chain topology, multiple hosts are connected by placing a cable from one node to another.
+
+Since this creates a chain of connections, it is also known as a daisy-chain configuration in which multiple hardware components are connected in a series. This type of networking is often found in automation technology (CAN).
+
+Daisy chaining is based on the physical arrangement of the nodes, in contrast to token procedures, which are structural but can be made independent of the physical layout. The signal is sent to and from a component via its previous nodes to the computer system.
+
+![Daisy Chain Topology](assets/10-daisy-chain.png)
+
+
+
+# Proxies
+
+Many people have different opinions on what a proxy is:
+
+- **Security Professionals** might think of HTTP Proxies (e.g., BurpSuite) or pivoting with SOCKS/SSH Proxies (e.g., Chisel, ptunnel, sshuttle).
+- **Web Developers** use proxies like Cloudflare or ModSecurity to block malicious traffic.
+- **Average Users** might see a proxy as a tool to obfuscate their location and access content from another country.
+- **Law Enforcement** might associate proxies with illegal activities.
+
+Not all these examples are correct. A proxy is a device or service that sits in the middle of a connection and acts as a mediator. This means the proxy must be able to inspect the contents of the traffic. Without this mediation capability, the device is a gateway, not a proxy.
+
+For many average users, the concept of a proxy is often confused with a VPN, which is technically not a proxy. Most people mistakenly believe that any change in IP address is due to a proxy. While this is a common and harmless misconception, correcting it might lead to tangential discussions.
+
+Proxies generally operate at Layer 7 of the OSI Model. There are several types of proxy services, including:
+
+## Dedicated Proxy / Forward Proxy
+
+A Forward Proxy is what most people imagine when they think of a proxy. In this setup, a client makes a request to a computer (the proxy), which then carries out the request on behalf of the client.
+
+### Examples and Use Cases:
+
+- **Corporate Networks:** Sensitive computers may use a forward proxy to access the Internet, which helps in defense against malware. The proxy needs to be aware of proxy settings to be effective. For instance, malware targeting Firefox might have a harder time if it needs to pull proxy settings specifically for Firefox.
+- **Burp Suite:** Often used to forward HTTP requests, but it can also be configured as a reverse or transparent proxy.
+
+![Forward Proxy](assets/11-forward-proxy.png)
+
+## Reverse Proxy
+
+A Reverse Proxy works in the opposite direction of a Forward Proxy. Instead of filtering outgoing requests, it filters incoming ones. Its main goal is to handle requests on behalf of a server.
+
+### Examples and Use Cases:
+
+- **Cloudflare:** Used to protect against DDoS attacks and to filter traffic sent to web servers.
+- **Penetration Testing:** Attackers may configure reverse proxies on infected endpoints to bypass firewalls or evade logging. This can help in evading IDS (Intrusion Detection Systems) by tunneling requests through an SSH connection.
+- **ModSecurity:** A Web Application Firewall (WAF) that inspects and blocks malicious web requests.
+
+![Reverse Proxy](assets/12-reverse-proxy.png)
+
+## (Non-) Transparent Proxy
+
+Proxies can be either transparent or non-transparent.
+
+### Transparent Proxy
+
+- **Definition:** The client is unaware of its existence. It intercepts and substitutes the client's communication requests.
+- **Functionality:** Acts as a communication partner to the outside world.
+
+### Non-Transparent Proxy
+
+- **Definition:** Requires explicit configuration to inform the user and the software of its existence. If not configured, communication to the Internet is blocked since the proxy is the sole communication path.
+
+
+
+# Networking Models
+
+Two primary networking models describe the communication and transfer of data from one host to another: the ISO/OSI model and the TCP/IP model. These models offer a structured representation of how data is transferred and managed in a network.
+
+![Networking Models](assets/13-Networking-models.png)
+
+## The OSI Model
+
+The OSI model, often referred to as the ISO/OSI layer model, is a reference model used to describe and define communication between systems. It consists of seven individual layers, each with specific functions.
+
+- **OSI** stands for Open Systems Interconnection model, published by the International Telecommunication Union (ITU) and the International Organization for Standardization (ISO). Hence, it is commonly referred to as the ISO/OSI layer model.
+
+## The TCP/IP Model
+
+TCP/IP (Transmission Control Protocol/Internet Protocol) is a term for a suite of network protocols responsible for the switching and transport of data packets on the Internet. TCP/IP forms the foundation of the Internet and includes more than just TCP and IP. Other protocols in this suite include:
+
+- **ICMP** (Internet Control Message Protocol)
+- **UDP** (User Datagram Protocol)
+
+The TCP/IP model provides the necessary functions for data packet transport and switching in both private and public networks.
+
+## ISO/OSI vs. TCP/IP
+
+- **TCP/IP:** Focuses on practical aspects of data transfer, allowing flexibility in how protocols are implemented. It provides a set of guidelines but is less strict than OSI.
+
+- **OSI:** Serves as a comprehensive reference model that is often considered more rigorous. It is used to understand and describe network interactions at a detailed level.
+
+## Packet Transfers
+
+In a layered network system, each layer exchanges data in a format known as a Protocol Data Unit (PDU). For example, when you browse a website:
+
+1. **Data Request:** The remote server software processes the requested data and passes it to the application layer.
+2. **Layer Processing:** The data is processed layer by layer, each layer performing its assigned functions.
+3. **Transmission:** Data is transferred through the network's physical layer until it reaches the destination server or device.
+4. **Reprocessing:** The data is routed through the layers again at the receiving end, where each layer performs its operations.
+5. **Usage:** The application layer at the receiving end uses the data.
+
+During this process, each layer adds a header to the PDU from the upper layer. This process, known as encapsulation, helps in controlling and identifying the packet. The headers and data together form the PDU for the next layer. The receiver reverses this process, extracting and using the data.
+
+![Packet Transfers](assets/14-packet-transfers.png)
+
+## Application in Penetration Testing
+
+Both reference models are valuable for penetration testers:
+
+- **TCP/IP Model:** Helps in understanding how connections are established and managed quickly.
+- **OSI Model:** Allows for detailed analysis of network traffic, layer by layer.
+
+Penetration testers use these models to intercept and analyze network traffic, gaining insights into data transmission processes and vulnerabilities. Familiarity with both models is crucial for effective network traffic analysis.
+
+![Network Traffic Analysis](assets/15-packet-transfer.png)
+
+
+# The OSI Model
+
+The goal of defining the ISO/OSI standard was to create a reference model that enables communication between different technical systems across various devices and technologies, ensuring compatibility. The OSI model utilizes seven different layers, each hierarchically based on one another, to achieve this goal. These layers represent the phases through which packets pass in the establishment of a connection, providing a visual representation of how a connection is structured and established.
+
+## OSI Layers
+
+| Layer | Function |
+|-------|----------|
+| **7. Application** | Controls the input and output of data and provides application functions. |
+| **6. Presentation** | Transforms data into a form that is independent of the application, handling system-dependent data representation. |
+| **5. Session** | Manages the logical connection between systems, ensuring reliable communication and handling connection breakdowns or other issues. |
+| **4. Transport** | Provides end-to-end control of data, including congestion control and segmentation of data streams. |
+| **3. Network** | Establishes connections in circuit-switched networks and forwards data packets in packet-switched networks. Responsible for end-to-end transmission from sender to receiver. |
+| **2. Data Link** | Ensures reliable and error-free transmission on the medium by dividing bitstreams from layer 1 into blocks or frames. |
+| **1. Physical** | Handles the transmission of data via electrical signals, optical signals, or electromagnetic waves on wired or wireless transmission lines. |
+
+## Layer Functions
+
+- **Layers 2-4** are transport-oriented, focusing on reliable data transmission and control.
+- **Layers 5-7** are application-oriented, handling data representation and communication protocols.
+
+Each layer performs precisely defined tasks and provides services to the layer directly above it, using the services of the layer below it.
+
+## Data Transmission Process
+
+When an application sends a packet to another system, the layers work as follows:
+
+1. **Sender System:**
+   - Data is processed from Layer 7 down to Layer 1.
+   
+2. **Receiver System:**
+   - The received packet is processed from Layer 1 up to Layer 7.
+
+This ensures that both the sender and receiver systems can handle and interpret the data correctly, maintaining the communication's security, reliability, and performance.
+
+
+# Network Layer
+
+The network layer (<code style="color: cyan">Layer 3</code>) of OSI controls the exchange of data packets, as these cannot be directly routed to the receiver and therefore have to be provided with routing nodes. The data packets are then transferred from node to node until they reach their target. To implement this, the network layer identifies the individual network nodes, sets up and clears connection channels, and takes care of routing and data flow control. When sending the packets, addresses are evaluated, and the data is routed through the network from node to node. There is usually no processing of the data in the layers above the <code style="color: cyan">Layer 3</code> in the nodes. Based on the addresses, the routing and the construction of routing tables are done.
+
+In short, it is responsible for the following functions:
+
+- <code style="color: cyan">Logical Addressing</code>
+- <code style="color: cyan">Routing</code>
+
+Protocols are defined in each layer of OSI, and these protocols represent a collection of rules for communication in the respective layer. They are transparent to the protocols of the layers above or below. Some protocols fulfill tasks of several layers and extend over two or more layers. The most used protocols on this layer are:
+
+- <code style="color: aquamarine">IPv4 / IPv6</code>
+- <code style="color: aquamarine">IPsec</code>
+- <code style="color: aquamarine">ICMP</code>
+- <code style="color: aquamarine">IGMP</code>
+- <code style="color: aquamarine">RIP</code>
+- <code style="color: aquamarine">OSPF</code>
+
+It ensures the routing of packets from source to destination within or outside a subnet. These two subnets may have different addressing schemes or incompatible addressing types. In both cases, the data transmission in each case goes through the entire communication network and includes routing between the network nodes. Since direct communication between the sender and the receiver is not always possible due to the different subnets, packets must be forwarded from nodes (routers) that are on the way. Forwarded packets do not reach the higher layers but are assigned a new intermediate destination and sent to the next node.
+
+
+
+
+# IP Addresses
+
+Each host in the network is identified by the so-called <code style="color: greenyellow">Media Access Control address (MAC)</code>. This allows data exchange within a single network. If the remote host is located in another network, knowledge of the MAC address alone is not enough to establish a connection. Addressing on the Internet is done via the <code style="color: greenyellow">IPv4</code> and/or <code style="color: greenyellow">IPv6</code> address, which is made up of the network address and the host address.
+
+It does not matter whether it is a smaller network, such as a home computer network, or the entire Internet. The IP address ensures the delivery of data to the correct receiver. We can imagine the representation of MAC and IPv4 / IPv6 addresses as follows:
+
+- <code style="color: greenyellow">IPv4 / IPv6</code> - describes the unique postal address and district of the receiver's building.
+- <code style="color: greenyellow">MAC</code> - describes the exact floor and apartment of the receiver.
+
+It is possible for a single IP address to address multiple receivers (broadcasting) or for a device to respond to multiple IP addresses. However, it must be ensured that each IP address is assigned only once within the network.
+
+## IPv4 Structure
+
+The most common method of assigning IP addresses is <code style="color: greenyellow">IPv4</code>, which consists of a 32-bit binary number combined into 4 bytes consisting of 8-bit groups (octets) ranging from 0-255. These are converted into more easily readable decimal numbers, separated by dots and represented as dotted-decimal notation.
+
+Thus an IPv4 address can look like this:
+
+**Notation:**
+- Binary: `0111 1111.0000 0000.0000 0000.0000 0001`
+- Decimal: `127.0.0.1`
+
+Each network interface (network cards, network printers, or routers) is assigned a unique IP address.
+
+The <code style="color: greenyellow">IPv4</code> format allows 4,294,967,296 unique addresses. The IP address is divided into a host part and a network part. The router assigns the host part of the IP address at home or by an administrator. The respective network administrator assigns the network part. On the Internet, this is IANA, which allocates and manages the unique IPs.
+
+In the past, further classification took place here. The IP network blocks were divided into classes A - E. The different classes differed in the host and network shares' respective lengths.
+
+**Class** | **Network Address** | **First Address** | **Last Address** | **Subnetmask** | **CIDR** | **Subnets** | **IPs**
+---------|---------------------|-------------------|------------------|----------------|----------|-------------|--------
+A        | 1.0.0.0             | 1.0.0.1           | 127.255.255.255  | 255.0.0.0      | /8       | 127         | 16,777,214 + 2
+B        | 128.0.0.0           | 128.0.0.1         | 191.255.255.255  | 255.255.0.0    | /16      | 16,384      | 65,534 + 2
+C        | 192.0.0.0           | 192.0.0.1         | 223.255.255.255  | 255.255.255.0  | /24      | 2,097,152   | 254 + 2
+D        | 224.0.0.0           | 224.0.0.1         | 239.255.255.255  | Multicast      | Multicast| Multicast   | Multicast
+E        | 240.0.0.0           | 240.0.0.1         | 255.255.255.255  | Reserved       | Reserved | Reserved    | Reserved
+
+## Subnet Mask
+
+A further separation of these classes into small networks is done with the help of <code style="color: greenyellow">subnetting</code>. This separation is done using the netmasks, which is as long as an IPv4 address. As with classes, it describes which bit positions within the IP address act as network part or host part.
+
+**Class** | **Network Address** | **First Address** | **Last Address** | **Subnetmask** | **CIDR** | **Subnets** | **IPs**
+---------|---------------------|-------------------|------------------|----------------|----------|-------------|--------
+A        | 1.0.0.0             | 1.0.0.1           | 127.255.255.255  | 255.0.0.0      | /8       | 127         | 16,777,214 + 2
+B        | 128.0.0.0           | 128.0.0.1         | 191.255.255.255  | 255.255.0.0    | /16      | 16,384      | 65,534 + 2
+C        | 192.0.0.0           | 192.0.0.1         | 223.255.255.255  | 255.255.255.0  | /24      | 2,097,152   | 254 + 2
+D        | 224.0.0.0           | 224.0.0.1         | 239.255.255.255  | Multicast      | Multicast| Multicast   | Multicast
+E        | 240.0.0.0           | 240.0.0.1         | 255.255.255.255  | Reserved       | Reserved | Reserved    | Reserved
+
+## Network and Gateway Addresses
+
+The two additional IPs added in the IPs column are reserved for the so-called <code style="color: greenyellow">network address</code> and the <code style="color: greenyellow">broadcast address</code>. Another important role plays the <code style="color: greenyellow">default gateway</code>, which is the name for the IPv4 address of the router that couples networks and systems with different protocols and manages addresses and transmission methods. It is common for the default gateway to be assigned the first or last assignable IPv4 address in a subnet. This is not a technical requirement but has become a de-facto standard in network environments of all sizes.
+
+**Class** | **Network Address** | **First Address** | **Last Address** | **Subnetmask** | **CIDR** | **Subnets** | **IPs**
+---------|---------------------|-------------------|------------------|----------------|----------|-------------|--------
+A        | 1.0.0.0             | 1.0.0.1           | 127.255.255.255  | 255.0.0.0      | /8       | 127         | 16,777,214 + 2
+B        | 128.0.0.0           | 128.0.0.1         | 191.255.255.255  | 255.255.0.0    | /16      | 16,384      | 65,534 + 2
+C        | 192.0.0.0           | 192.0.0.1         | 223.255.255.255  | 255.255.255.0  | /24      | 2,097,152   | 254 + 2
+D        | 224.0.0.0           | 224.0.0.1         | 239.255.255.255  | Multicast      | Multicast| Multicast   | Multicast
+E        | 240.0.0.0           | 240.0.0.1         | 255.255.255.255  | Reserved       | Reserved | Reserved    | Reserved
+
+## Broadcast Address
+
+The <code style="color: greenyellow">broadcast IP address</code>'s task is to connect all devices in a network with each other. Broadcast in a network is a message that is transmitted to all participants of a network and does not require any response. In this way, a host sends a data packet to all other participants of the network simultaneously and, in doing so, communicates its IP address, which the receivers can use to contact it. This is the last IPv4 address that is used for the broadcast.
+
+**Class** | **Network Address** | **First Address** | **Last Address** | **Subnetmask** | **CIDR** | **Subnets** | **IPs**
+---------|---------------------|-------------------|------------------|----------------|----------|-------------|--------
+A        | 1.0.0.0             | 1.0.0.1           | 127.255.255.255  | 255.0.0.0      | /8       | 127         | 16,777,214 + 2
+B        | 128.0.0.0           | 128.0.0.1         | 191.255.255.255  | 255.255.0.0    | /16      | 16,384      | 65,534 + 2
+C        | 192.0.0.0           | 192.0.0.1         | 223.255.255.255  | 255.255.255.0  | /24      | 2,097,152   | 254 + 2
+D        | 224.0.0.0           | 224.0.0.1         | 239.255.255.255  | Multicast      | Multicast| Multicast   | Multicast
+E        | 240.0.0.0           | 240.0.0.1         | 255.255.255.255  | Reserved       | Reserved | Reserved    | Reserved
+
+## Binary System
+
+The binary system is a number system that uses only two different states that are represented as two numbers (0 and 1) opposite to the decimal system (0 to 9).
+
+An IPv4 address is divided into 4 octets, as we have already seen. Each octet consists of 8 bits. Each position of a bit in an octet has a specific decimal value. Let's take the following IPv4 address as an example:
+
+**IPv4 Address:** `192.168.10.39`
+
+Here is an example of how the first octet looks like:
+
+**1st Octet - Value:** 192
+  IP Addresses
+**Values:**         128  64  32  16  8  4  2  1
+**Binary:**           1   1   0   0  0  0  0  0
+
+If we calculate the sum of all these values for each octet where the bit is set to 1, we get the sum:
+
+**Octet** | **Values** | **Sum**
+---------|------------|--------
+1st      | 128 + 64 + 0 + 0 + 0 + 0 + 0 + 0 | = 192
+2nd      | 128 + 0 + 32 + 0 + 8 + 0 + 0 + 0   | = 168
+3rd      | 0 + 0 + 0 + 0 + 8 + 0 + 2 + 0     | = 10
+4th      | 0 + 0 + 32 + 0 + 0 + 4 + 2 + 1     | = 39
+
+The entire representation from binary to decimal would look like this:
+
+**IPv4 - Binary Notation**
+
+  IP Addresses
+**Octet:**             1st         2nd         3rd         4th
+**Binary:**         1100 0000 . 1010 1000 . 0000 1010 . 0010 0111
+**Decimal:**           192    .    168    .     10    .     39
+
+**IPv4 Address:** `192.168.10.39`
+
+This addition takes place for each octet, which results in a decimal representation of the IPv4 address. The subnet mask is calculated in the same way.
+
+**IPv4 - Decimal to Binary**
+
+  IP Addresses
+**Values:**         128  64  32  16  8  4  2  1
+**Binary:**           1   1   1   1  1  1  1  1
+
+**Octet** | **Values** | **Sum**
+---------|------------|--------
+1st      | 128 + 64 + 32 + 16 + 8 + 4 + 2 + 1 | = 255
+2nd      | 128 + 64 + 32 + 16 + 8 + 4 + 2 + 1 | = 255
+3rd      | 128 + 64 + 32 + 16 + 8 + 4 + 2 + 1 | = 255
+4th      | 0 + 0 + 0 + 0 + 0 + 0 + 0 + 0     | = 0
+
+**Subnet Mask**
+
+| **Octet** | 1st         | 2nd         | 3rd         | 4th         |
+|-----------|-------------|-------------|-------------|-------------|
+| **Binary**| 1111 1111   | 1111 1111   | 1111 1111   | 0000 0000   |
+| **Decimal**| 255         | 255         | 255         | 0           |
+
+
+**IPv4 Address:** `192.168.10.39`
+
+**Subnet mask:** `255.255.255.0`
+
+## CIDR
+
+**Classless Inter-Domain Routing (CIDR)** is a method of representation and replaces the fixed assignment between IPv4 address and network classes (A, B, C, D, E). The division is based on the subnet mask or the so-called CIDR suffix, which allows the bitwise division of the IPv4 address space and thus into subnets of any size. The CIDR suffix indicates how many bits from the beginning of the IPv4 address belong to the network. It is a notation that represents the subnet mask by specifying the number of 1-bits in the subnet mask.
+
+Let us stick to the following IPv4 address and subnet mask as an example:
+
+**IPv4 Address:** `192.168.10.39`
+
+**Subnet mask:** `255.255.255.0`
+
+Now the whole representation of the IPv4 address and the subnet mask would look like this:
+
+**CIDR:** `192.168.10.39/24`
+
+The CIDR suffix is, therefore, the sum of all ones in the subnet mask.
+
+**IP Addresses**
+
+| **Octet**  | 1st         | 2nd         | 3rd         | 4th         |
+|------------|-------------|-------------|-------------|-------------|
+| **Binary** | 1111 1111   | 1111 1111   | 1111 1111   | 0000 0000 (/24) |
+| **Decimal**| 255         | 255         | 255         | 0           |
