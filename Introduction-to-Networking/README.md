@@ -704,3 +704,55 @@ This is because the MAC address identifies the physical connection (network card
 |----------------|------------|------------|------------|------------|------------|------------|
 | **Binary**     | 1101 1110  | 1010 1101  | 1011 1110  | 1110 1111  | 0001 0011  | 0011 0111  |
 | **Hex**        | DE         | AD         | BE         | EF         | 13         | 37         |
+
+
+
+# Understanding MAC Addresses and IP Packet Delivery
+
+When an IP packet is delivered, it must be addressed at Layer 2 (Data Link Layer) to the destination host's physical address (MAC address) or to the router/NAT responsible for routing the packet. Each packet contains a sender's address and a destination address.
+
+## MAC Address Structure
+
+A **MAC address** consists of a total of 6 bytes (48 bits). It is divided into two parts:
+
+1. **Organization Unique Identifier (OUI)**: The first half of the MAC address (3 bytes / 24 bits) is called the OUI. It is defined by the Institute of Electrical and Electronics Engineers (IEEE) and is assigned to manufacturers.
+2. **Individual Address Part (NIC)**: The last half (3 bytes) is the unique part assigned by the manufacturer to identify individual devices (Network Interface Controllers or NICs).
+
+### Example MAC Address Representation
+
+For the following MAC address:
+
+
+- **OUI** (first half of the address): `DE:AD:BE`
+- **NIC** (second half of the address): `EF:13:37`
+
+#### OUI Part
+
+| 1st Octet  | 2nd Octet  | 3rd Octet  |
+|------------|------------|------------|
+| **Binary** | 1101 1110  | 1010 1101  | 1011 1110  |
+| **Hex**    | DE         | AD         | BE         |
+
+#### NIC Part
+
+| 4th Octet  | 5th Octet  | 6th Octet  |
+|------------|------------|------------|
+| **Binary** | 1110 1111  | 0001 0011  | 0011 0111  |
+| **Hex**    | EF         | 13         | 37         |
+
+### How MAC Addresses are Used in IP Packet Delivery
+
+- **Same Subnet**: If the target IP address is within the **same subnet**, the IP packet is delivered directly to the destination host’s MAC address.
+- **Different Subnet**: If the target IP address is in a **different subnet**, the packet is sent to the MAC address of the **default gateway** (router). The router then forwards the packet to the next destination.
+
+### Role of ARP (Address Resolution Protocol)
+
+To map an IP address to a MAC address, IPv4 networks use the **Address Resolution Protocol (ARP)**. ARP is used to discover the MAC address associated with a given IP address within a local network.
+
+### Reserved MAC Addresses
+
+Similar to IP addresses, certain MAC address ranges are reserved for specific purposes, such as the **local range** for private use.
+
+---
+
+For more information on MAC addresses and how they function in networking, refer to [IEEE MAC Address Standards](https://standards.ieee.org/products-services/regauth/oui/index.html).
