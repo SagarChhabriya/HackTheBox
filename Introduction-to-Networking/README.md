@@ -936,3 +936,109 @@ In the vast field of information technology, understanding key terminology is es
 | Generic Routing Encapsulation                      | GRE     | A protocol for encapsulating data transmitted within VPN tunnels.                                   |
 | Remote Shell                                       | RSH     | A Unix program allowing execution of commands on remote computers.                                  |
 
+
+
+# Common Protocols
+
+Internet protocols are standardized rules defined in RFCs (Request for Comments) that specify how devices on a network communicate. They ensure consistent and reliable information exchange, regardless of hardware and software differences. There are two main types of connections used on networks:
+
+- **Transmission Control Protocol (TCP)**: A connection-oriented protocol that establishes a virtual connection before transmitting data.
+- **User Datagram Protocol (UDP)**: A connectionless protocol that sends data packets without establishing a prior connection.
+
+## Transmission Control Protocol (TCP)
+
+TCP establishes a connection using a Three-Way Handshake and maintains it until data transfer is complete. This reliability comes with overhead, making it slower than UDP.
+
+### Key TCP Protocols
+
+| Protocol                                   | Acronym | Port      | Description                                                 |
+|--------------------------------------------|---------|-----------|-------------------------------------------------------------|
+| Telnet                                     | Telnet  | 23        | Remote login service                                        |
+| Secure Shell                               | SSH     | 22        | Secure remote login service                                 |
+| Simple Network Management Protocol         | SNMP    | 161-162   | Manage network devices                                      |
+| Hyper Text Transfer Protocol               | HTTP    | 80        | Used to transfer webpages                                   |
+| Hyper Text Transfer Protocol Secure        | HTTPS   | 443       | Used for secure webpage transfer                            |
+| Domain Name System                         | DNS     | 53        | Lookup domain names                                        |
+| File Transfer Protocol                     | FTP     | 20-21     | Used to transfer files                                      |
+| Trivial File Transfer Protocol             | TFTP    | 69        | Used to transfer files                                      |
+| Network Time Protocol                      | NTP     | 123       | Synchronize computer clocks                                 |
+| Simple Mail Transfer Protocol              | SMTP    | 25        | Used for email transfer                                     |
+| Post Office Protocol                       | POP3    | 110       | Used to retrieve emails                                     |
+| Internet Message Access Protocol           | IMAP    | 143       | Used to access emails                                       |
+| Server Message Block                       | SMB     | 445       | Used to transfer files                                      |
+| Network File System                        | NFS     | 111, 2049 | Used to mount remote systems                                |
+| Bootstrap Protocol                         | BOOTP   | 67, 68    | Used to bootstrap computers                                  |
+| Kerberos                                   | Kerberos| 88        | Used for authentication and authorization                   |
+| Lightweight Directory Access Protocol      | LDAP    | 389       | Used for directory services                                  |
+| Remote Authentication Dial-In User Service | RADIUS  | 1812, 1813| Used for authentication and authorization                   |
+| Dynamic Host Configuration Protocol        | DHCP    | 67, 68    | Used to configure IP addresses                              |
+| Remote Desktop Protocol                    | RDP     | 3389      | Used for remote desktop access                              |
+| Network News Transfer Protocol             | NNTP    | 119       | Used to access newsgroups                                   |
+| Remote Procedure Call                      | RPC     | 135, 137-139| Used to call remote procedures                             |
+| Identification Protocol                    | Ident   | 113       | Used to identify user processes                             |
+| Internet Control Message Protocol          | ICMP    | 0-255     | Used to troubleshoot network issues                          |
+| Internet Group Management Protocol         | IGMP    | 0-255     | Used for multicasting                                       |
+| Internet Key Exchange                      | IKE     | 500       | Used for secure connection establishment                    |
+| Microsoft SQL Server                       | ms-sql-s| 1433      | Used for client connections to Microsoft SQL Server         |
+| Point-to-Point Tunneling Protocol         | PPTP    | 1723      | Used to create VPNs                                        |
+| Secure Copy Protocol                       | SCP     | 22        | Securely copy files between systems                         |
+
+## User Datagram Protocol (UDP)
+
+UDP is a faster but less reliable protocol that sends data packets without establishing a connection. This makes it suitable for applications where speed is more important than reliability.
+
+### Key UDP Protocols
+
+| Protocol                                   | Acronym | Port      | Description                                                 |
+|--------------------------------------------|---------|-----------|-------------------------------------------------------------|
+| Domain Name System                         | DNS     | 53        | Resolves domain names to IP addresses                       |
+| Trivial File Transfer Protocol             | TFTP    | 69        | Used to transfer files                                      |
+| Network Time Protocol                      | NTP     | 123       | Synchronizes clocks in a network                            |
+| Simple Network Management Protocol         | SNMP    | 161       | Monitors and manages network devices                        |
+| Routing Information Protocol               | RIP     | 520       | Exchanges routing information between routers                |
+| Dynamic Host Configuration Protocol        | DHCP    | 67       | Assigns IP addresses dynamically                            |
+| Telnet                                     | TELNET  | 23        | Text-based remote access communication                      |
+| Internet Protocol Security                 | IPsec   | 500       | Provides secure communication, commonly used in VPNs       |
+
+## Internet Control Message Protocol (ICMP)
+
+ICMP is used for error reporting and status information. It facilitates communication between devices for various purposes, including connectivity tests (e.g., ping requests).
+
+### ICMP Requests and Messages
+
+#### Requests
+- **Echo Request**: Tests if a device is reachable (ping).
+- **Timestamp Request**: Determines the time on a remote device.
+- **Address Mask Request**: Requests the subnet mask of a device.
+
+#### Messages
+- **Echo Reply**: Response to an echo request.
+- **Destination Unreachable**: Indicates a packet cannot reach its destination.
+- **Redirect**: Informs a device to send packets to a different router.
+- **Time Exceeded**: Sent when a packet takes too long to reach its destination.
+
+### Time-To-Live (TTL)
+The TTL field limits a packet's lifetime, preventing indefinite circulation. Each router decrements the TTL value, and when it reaches zero, the packet is discarded, triggering a Time Exceeded message.
+
+## Voice over Internet Protocol (VoIP)
+
+VoIP allows voice and multimedia communications over broadband connections. Common applications include Skype and Zoom. The most used ports for VoIP are:
+
+- **SIP (Session Initiation Protocol)**: TCP/5060 and TCP/5061
+- **H.323**: TCP/1720
+
+### Common SIP Methods
+
+| Method    | Description                                     |
+|-----------|-------------------------------------------------|
+| INVITE    | Initiates a session or invites another endpoint.|
+| ACK       | Confirms receipt of an INVITE request.         |
+| BYE       | Terminates a session.                          |
+| CANCEL    | Cancels a pending INVITE request.              |
+| REGISTER  | Registers a SIP user agent with a SIP server.  |
+| OPTIONS   | Requests information about SIP server capabilities.|
+
+### Information Disclosure
+SIP can expose user information, making it susceptible to attacks. For example, the SIP OPTIONS request can be used to gather details about a server’s capabilities.
+
+This structured overview serves as a foundational reference for understanding common networking protocols. You can expand or modify it further as needed!
