@@ -807,3 +807,79 @@ ARP helps devices find MAC addresses based on IP addresses:
 An attack where false ARP messages link your MAC address with another device’s IP, allowing traffic interception. To protect against ARP spoofing, use secure protocols and implement network security measures like firewalls and intrusion detection systems.
 
 
+
+# IPv6 Addresses
+
+**IPv6** is the successor to **IPv4**, featuring a 128-bit address length. It allows for a much larger address space and provides several advantages over IPv4, such as:
+
+- **Larger Address Space**: Approximately 340 undecillion addresses.
+- **Address Self-Configuration**: Through Stateless Address Autoconfiguration (SLAAC).
+- **Multiple Addresses**: Each interface can have multiple IPv6 addresses.
+- **Faster Routing**: More efficient data handling.
+- **Mandatory IPsec**: For end-to-end encryption.
+- **Larger Data Packages**: Supports packets up to 4 GBytes.
+
+### Key Differences Between IPv4 and IPv6
+
+| Feature                 | IPv4             | IPv6             |
+|-------------------------|------------------|------------------|
+| Bit Length              | 32-bit           | 128-bit          |
+| OSI Layer               | Network Layer     | Network Layer     |
+| Addressing Range        | ~4.3 billion     | ~340 undecillion  |
+| Representation          | Decimal          | Hexadecimal       |
+| Prefix Notation         | 10.10.10.0/24    | fe80::dd80:b1a9:6687:2d3b/64 |
+| Dynamic Addressing      | DHCP             | SLAAC / DHCPv6    |
+| IPsec                   | Optional         | Mandatory         |
+
+### Types of IPv6 Addresses
+
+1. **Unicast**: For a single interface.
+2. **Anycast**: For multiple interfaces; only one receives the packet.
+3. **Multicast**: For multiple interfaces; all receive the same packet.
+4. **Broadcast**: Does not exist; realized using multicast.
+
+### Hexadecimal System
+
+The hexadecimal system is used to make binary representations more readable. It represents 16 states (0-F) with a single character.
+
+| Decimal | Hex | Binary     |
+|---------|-----|------------|
+| 1       | 1   | 0001       |
+| 2       | 2   | 0010       |
+| 3       | 3   | 0011       |
+| 4       | 4   | 0100       |
+| 5       | 5   | 0101       |
+| 6       | 6   | 0110       |
+| 7       | 7   | 0111       |
+| 8       | 8   | 1000       |
+| 9       | 9   | 1001       |
+| 10      | A   | 1010       |
+| 11      | B   | 1011       |
+| 12      | C   | 1100       |
+| 13      | D   | 1101       |
+| 14      | E   | 1110       |
+| 15      | F   | 1111       |
+
+#### Example: IPv4 to Hexadecimal
+For the IPv4 address **192.168.12.160**:
+- **Binary**: 11000000 10101000 00001100 10100000
+- **Hex**: C0 A8 0C A0
+
+### IPv6 Address Representation
+
+An IPv6 address consists of 16 bytes, represented in hexadecimal notation as eight blocks of 16 bits (four hex digits), separated by colons. Leading zeros can be omitted, and consecutive blocks of zeros can be shortened with double colons (::), but this can only be done once.
+
+#### Example IPv6 Address
+- **Full IPv6**: fe80:0000:0000:0000:dd80:b1a9:6687:2d3b/64
+- **Short IPv6**: fe80::dd80:b1a9:6687:2d3b/64
+
+### Parts of an IPv6 Address
+1. **Network Prefix**: Identifies the network, subnet, or address range.
+2. **Interface Identifier**: Formed from the 48-bit MAC address, converted to a 64-bit address.
+
+The default prefix length is **/64**, with common prefixes including **/32**, **/48**, and **/56**.
+
+### RFC 5952 Notation Rules
+- All alphabetical characters are in lower case.
+- Leading zeros of a block are omitted.
+- Consecutive blocks of four zeros are shortened with two colons (::), done only once.
