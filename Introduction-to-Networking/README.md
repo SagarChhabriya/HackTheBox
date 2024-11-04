@@ -883,3 +883,56 @@ The default prefix length is **/64**, with common prefixes including **/32**, **
 - All alphabetical characters are in lower case.
 - Leading zeros of a block are omitted.
 - Consecutive blocks of four zeros are shortened with two colons (::), done only once.
+
+
+# Networking Key Terminology
+
+In the vast field of information technology, understanding key terminology is essential. This guide provides an overview of some of the most common protocols and their descriptions. Note that this list is not exhaustive, and it's beneficial to review and expand it as you learn.
+
+| Protocol                                          | Acronym | Description                                                                                          |
+|---------------------------------------------------|---------|------------------------------------------------------------------------------------------------------|
+| Wired Equivalent Privacy                          | WEP     | A security protocol commonly used to secure wireless networks.                                      |
+| Secure Shell                                      | SSH     | A secure network protocol for logging into and executing commands on remote systems.                |
+| File Transfer Protocol                             | FTP     | A protocol used to transfer files between systems.                                                  |
+| Simple Mail Transfer Protocol                      | SMTP    | A protocol for sending and receiving emails.                                                       |
+| Hypertext Transfer Protocol                        | HTTP    | A client-server protocol for transmitting data over the internet.                                   |
+| Server Message Block                               | SMB     | A protocol for sharing files, printers, and other resources in a network.                          |
+| Network File System                                | NFS     | A protocol for accessing files over a network.                                                     |
+| Simple Network Management Protocol                 | SNMP    | A protocol for managing network devices.                                                            |
+| Wi-Fi Protected Access                             | WPA     | A wireless security protocol that protects networks from unauthorized access.                       |
+| Temporal Key Integrity Protocol                    | TKIP    | A security protocol for wireless networks, considered less secure than WPA.                        |
+| Network Time Protocol                              | NTP     | A protocol for synchronizing the clocks of computers on a network.                                 |
+| Virtual Local Area Network                         | VLAN    | A method for segmenting a network into multiple logical networks.                                   |
+| VLAN Trunking Protocol                             | VTP     | A Layer 2 protocol used to maintain a virtual LAN spanning multiple switches.                       |
+| Routing Information Protocol                       | RIP     | A distance-vector routing protocol used in LANs and WANs.                                          |
+| Open Shortest Path First                           | OSPF    | An interior gateway protocol for routing within a single Autonomous System (AS).                    |
+| Interior Gateway Routing Protocol                  | IGRP    | A Cisco proprietary protocol designed for routing within autonomous systems.                        |
+| Enhanced Interior Gateway Routing Protocol         | EIGRP   | An advanced distance-vector routing protocol for routing IP traffic within a network.               |
+| Pretty Good Privacy                                | PGP     | An encryption program used for securing emails, files, and other data.                             |
+| Network News Transfer Protocol                     | NNTP    | A protocol for distributing and retrieving messages in newsgroups.                                  |
+| Cisco Discovery Protocol                           | CDP     | A proprietary protocol by Cisco for discovering and managing Cisco devices in a network.            |
+| Hot Standby Router Protocol                        | HSRP    | A protocol for providing redundancy in Cisco routers in case of device failure.                     |
+| Virtual Router Redundancy Protocol                 | VRRP    | A protocol for automatically assigning available IP routers to participating hosts.                 |
+| Spanning Tree Protocol                             | STP     | A network protocol for ensuring a loop-free topology in Layer 2 Ethernet networks.                  |
+| Terminal Access Controller Access-Control System   | TACACS  | A protocol providing centralized authentication, authorization, and accounting for network access.  |
+| Session Initiation Protocol                        | SIP     | A signaling protocol for establishing and terminating real-time sessions over an IP network.        |
+| Voice Over IP                                     | VOIP    | Technology allowing telephone calls to be made over the internet.                                   |
+| Extensible Authentication Protocol                 | EAP     | A framework for authentication supporting multiple methods like passwords and digital certificates. |
+| Lightweight Extensible Authentication Protocol      | LEAP    | A proprietary wireless authentication protocol by Cisco, based on EAP.                             |
+| Protected Extensible Authentication Protocol       | PEAP    | A security protocol providing an encrypted tunnel for wireless and other networks.                  |
+| Systems Management Server                          | SMS     | A solution for managing networks, systems, and mobile devices.                                      |
+| Microsoft Baseline Security Analyzer               | MBSA    | A free tool from Microsoft for detecting potential security vulnerabilities in systems.             |
+| Supervisory Control and Data Acquisition           | SCADA   | An industrial control system for monitoring and controlling industrial processes.                    |
+| Virtual Private Network                            | VPN     | Technology allowing users to create a secure, encrypted connection over the internet.               |
+| Internet Protocol Security                         | IPsec   | A protocol for secure communication over a network, commonly used in VPNs.                          |
+| Point-to-Point Tunneling Protocol                  | PPTP    | A protocol for creating a secure, encrypted tunnel for remote access.                              |
+| Network Address Translation                        | NAT     | A technology allowing multiple devices on a private network to connect to the internet via one public IP address. |
+| Carriage Return Line Feed                          | CRLF    | Combines control characters to indicate the end of a line in certain text file formats.            |
+| Asynchronous JavaScript and XML                   | AJAX    | A web development technique for creating dynamic web pages using JavaScript and XML/JSON.          |
+| Internet Server Application Programming Interface   | ISAPI   | Allows creating performance-oriented web extensions for web servers using APIs.                     |
+| Uniform Resource Identifier                        | URI     | A syntax used to identify resources on the Internet.                                               |
+| Uniform Resource Locator                           | URL     | A subset of URI that identifies web pages or resources, including the protocol and domain name.    |
+| Internet Key Exchange                              | IKE     | A protocol for establishing secure connections, used in VPNs for authentication and encryption.     |
+| Generic Routing Encapsulation                      | GRE     | A protocol for encapsulating data transmitted within VPN tunnels.                                   |
+| Remote Shell                                       | RSH     | A Unix program allowing execution of commands on remote computers.                                  |
+
