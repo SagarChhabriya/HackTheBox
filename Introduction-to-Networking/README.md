@@ -1474,3 +1474,50 @@ The **payload** of an IP packet contains the actual data being transmitted. For 
 ---
 
 Understanding TCP/UDP connections and the structure of IP packets is crucial for network management, troubleshooting, and security practices. By leveraging these protocols effectively, network administrators can ensure reliable data transmission and robust network performance.
+
+
+
+# Cryptography
+
+Cryptography is essential for securely transmitting data over the Internet, such as payment information, emails, and personal data. It transforms data into an unreadable format for unauthorized users through various mathematical algorithms. Encryption methods can be classified into two main categories: **symmetric** and **asymmetric** encryption.
+
+## Symmetric Encryption
+
+- **Definition**: Uses the same key for both encryption and decryption.
+- **Key Management**: The sender and receiver must securely share and manage the same key. If the key is compromised, the data's security is at risk.
+- **Common Algorithms**: 
+  - **Advanced Encryption Standard (AES)**: Currently considered the most secure symmetric algorithm.
+  - **Data Encryption Standard (DES)**: An older algorithm with a 56-bit key length, now deemed insecure for many applications.
+- **Use Cases**: Often used for encrypting large amounts of data, such as files on a hard drive or data sent over networks.
+
+## Asymmetric Encryption
+
+- **Definition**: Uses a pair of keys—public and private keys.
+- **Functionality**: The public key encrypts data, while the private key decrypts it. This allows anyone to send encrypted data to the key owner without needing to share the private key.
+- **Examples**: 
+  - **RSA** (Rivest–Shamir–Adleman)
+  - **PGP** (Pretty Good Privacy)
+  - **ECC** (Elliptic Curve Cryptography)
+- **Advantages**: Enhanced security based on complex mathematical problems, and eliminates the need for key exchange.
+
+## Key Encryption Standards
+
+- **Data Encryption Standard (DES)**: A symmetric-key block cipher that uses a 56-bit key for encryption. Due to vulnerabilities, it has largely been replaced by more secure algorithms.
+- **Triple DES (3DES)**: An extension of DES that applies encryption three times, enhancing security but still limited by the 56-bit key length.
+- **Advanced Encryption Standard (AES)**: A successor to DES, supporting key lengths of 128, 192, or 256 bits. AES is faster and more secure, widely used in applications like:
+  - **WLAN IEEE 802.11i**
+  - **IPsec**
+  - **SSH**
+
+## Cipher Modes
+
+Cipher modes define how a block cipher processes data. Common modes include:
+
+- **Electronic Code Book (ECB)**: Not recommended due to security vulnerabilities and inability to hide data patterns effectively.
+- **Cipher Block Chaining (CBC)**: Default mode for AES; commonly used in disk encryption and secure communications (e.g., TLS).
+- **Cipher Feedback (CFB)**: Suitable for real-time data encryption, such as network communications.
+- **Output Feedback (OFB)**: Similar to CFB but generates a keystream that improves security for real-time communication.
+- **Counter (CTR)**: Used for real-time data streams; efficient for high-speed encryption tasks.
+- **Galois/Counter (GCM)**: Provides both confidentiality and integrity, used in secure communications like VPNs.
+
+Each encryption mode has specific characteristics and applications, and the choice depends on the security requirements of the task at hand.
