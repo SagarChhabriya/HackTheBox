@@ -1137,3 +1137,201 @@ Point-to-Point Tunneling Protocol (PPTP) establishes secure tunnels for VPNs but
 
 ## Conclusion
 VPNs are essential for providing secure remote access to private networks. While older protocols like PPTP have fallen out of favor due to security concerns, more robust options like IPsec and OpenVPN are widely recommended for ensuring secure communications over the internet.
+
+
+
+# Cisco IOS and VLANs
+
+## Cisco IOS Overview
+
+Cisco IOS is the operating system used in Cisco network devices like routers and switches. It helps manage and operate these devices, offering various features important for modern networks, such as:
+
+- **Support for IPv6**
+- **Quality of Service (QoS)**
+- **Security features** (like encryption and authentication)
+- **Virtualization** (such as VPLS and VRF)
+
+### Management Methods
+
+Cisco IOS can be managed through:
+
+- **Command Line Interface (CLI)**: The most common way to configure devices.
+- **Graphical User Interface (GUI)**: A visual way to manage devices.
+
+### Supported Protocols and Services
+
+Cisco IOS supports several protocols and services essential for network operations:
+
+| Protocol Type             | Description                                                                                   |
+|---------------------------|-----------------------------------------------------------------------------------------------|
+| **Routing Protocols**     | Used to route data packets (e.g., OSPF, BGP).                                               |
+| **Switching Protocols**   | Helps manage switches (e.g., VTP, STP).                                                     |
+| **Network Services**      | Automates IP address assignments (e.g., DHCP).                                              |
+| **Security Features**     | Controls access to resources (e.g., Access Control Lists - ACLs).                           |
+
+### Password Types in Cisco IOS
+
+Different passwords are used for various access levels:
+
+| Password Type       | Description                                                                  |
+|---------------------|------------------------------------------------------------------------------|
+| **User**            | Used to log in to Cisco IOS.                                               |
+| **Enable Password** | Allows entry into "enable" mode for advanced functions.                    |
+| **Secret**          | Secures access to certain functions.                                        |
+| **Enable Secret**   | An extra-secure password for "enable" mode, stored encrypted.              |
+
+## VLANs: Virtual Local Area Networks
+
+### What is a VLAN?
+
+A VLAN is a way to logically group devices connected to a switch, creating separate broadcast domains. This means a broadcast from one VLAN won’t affect devices in another VLAN.
+
+#### Benefits of VLANs
+
+1. **Better Organization**: Group devices by department or function.
+2. **Increased Security**: Prevent unauthorized access to other VLANs.
+3. **Simplified Administration**: Manage devices without considering their physical location.
+4. **Improved Performance**: Reduces broadcast traffic, freeing up bandwidth.
+
+### VLAN Setup for Departments
+
+Here’s an example of how a network can be segmented by department:
+
+| Department | VLAN ID | Subnet              |
+|------------|---------|---------------------|
+| Servers    | VLAN 10 | 192.168.1.0/24      |
+| C-Level    | VLAN 20 | 192.168.2.0/24      |
+| Finance    | VLAN 30 | 192.168.3.0/24      |
+| HR         | VLAN 40 | 192.168.4.0/24      |
+| Marketing   | VLAN 50 | 192.168.5.0/24      |
+| Support    | VLAN 60 | 192.168.6.0/24      |
+
+### VLAN Membership
+
+VLANs can be assigned in two ways:
+
+- **Static VLANs**: Manually assigned to each port. More secure but requires manual configuration.
+- **Dynamic VLANs**: Automatically assigned based on MAC addresses. More flexible but less secure.
+
+### Access and Trunk Ports
+
+- **Access Ports**: Carry traffic for only one VLAN. Any traffic coming in is assumed to belong to that VLAN.
+- **Trunk Ports**: Can carry traffic for multiple VLANs. Used to connect switches and routers.
+
+### VLAN Identification
+
+Standard Ethernet frames do not include VLAN information, so two main trunking methods are used to keep track of VLAN data:
+
+- **Inter-Switch Link (ISL)**: An older Cisco protocol that is now deprecated.
+- **IEEE 802.1Q**: A widely used standard that adds VLAN tags to Ethernet frames.
+
+By understanding these concepts, network administrators can effectively manage VLANs and enhance network performance and security.
+
+![image](https://github.com/user-attachments/assets/bc07c945-f33a-48e7-8eb3-da5cad919159)
+
+
+# VLAN Tagging and NIC Configuration
+
+## Tag Protocol Identifier (TPID) and Tag Control Information (TCI)
+
+- **TPID**: A 16-bit field always set to `0x8100` that identifies an Ethernet frame as an 802.1Q-tagged frame.
+- **TCI**: A 16-bit field containing:
+  - **Priority Code Point (PCP)**
+  - **Drop Eligible Indicator (DEI)** (previously known as Canonical Format Indicator - CFI)
+  - **VLAN Identifier (VID)**: The most important part for VLANs, occupying the low-order 12 bits. 
+
+Since VID is 12 bits, it allows for \(2^{12} - 2 = 4096\) VLAN IDs (0 and 4095 are reserved), which means an 802.1Q-tagged frame can represent up to 4094 VLANs. The practice of inserting multiple 802.1Q tags within a single packet is called **Double Tagging**, introduced by 802.1ad.
+
+### VLAN Tagging and Untagging
+
+- **VLAN Tagging**: Inserting VLAN information into an 802.1Q Ethernet header.
+- **VLAN Untagging**: Removing VLAN information from an 802.1Q-tagged Ethernet frame and forwarding the packet to the appropriate destination ports.
+
+## VLAN-Capable NICs
+
+Some network interface cards (NICs) support VLAN tagging, allowing you to assign VLAN IDs to them.
+
+### Assigning a VLAN ID to a NIC in Linux
+
+In Linux, creating a VLAN is done by creating an interface on top of another, called a parent interface. This VLAN interface will tag packets with the assigned VLAN ID, while returning packets will be untagged.
+
+#### Steps to Assign a VLAN ID in Linux
+
+[Read Here](https://academy.hackthebox.com/module/34/section/1878)
+
+
+# Key Exchange Mechanisms
+
+Key exchange methods are used to securely exchange cryptographic keys between two parties. This is crucial in many cryptographic protocols, as the security of encryption depends on keeping these keys secret. Different key exchange methods have unique characteristics and levels of security, and the choice of method depends on the specific circumstances and requirements of the situation.
+
+## Common Key Exchange Methods
+
+### Diffie-Hellman (DH)
+
+- **Overview**: Allows two parties to agree on a shared secret key without prior communication or shared information.
+- **Use**: Commonly used in establishing secure communication channels, such as in the TLS protocol.
+- **Limitations**:
+  - Vulnerable to Man-in-the-Middle (MITM) attacks, where an attacker intercepts and alters communications.
+  - Requires significant CPU power to generate keys, making it less suitable for low-power devices.
+
+### Rivest–Shamir–Adleman (RSA)
+
+- **Overview**: Uses large prime numbers to generate a shared secret key.
+- **Security**: Relies on the difficulty of factoring the product of two large primes.
+- **Applications**:
+  - Encrypting and signing messages for confidentiality and authentication.
+  - Protecting data in transit (e.g., SSL/TLS).
+  - Generating and verifying digital signatures.
+  - Authenticating users and devices (e.g., Kerberos).
+
+### Elliptic Curve Diffie-Hellman (ECDH)
+
+- **Overview**: A variant of Diffie-Hellman that uses elliptic curve cryptography.
+- **Advantages**:
+  - More efficient and secure than traditional Diffie-Hellman.
+  - Supports forward secrecy, ensuring past communications remain secure even if keys are compromised.
+  - Used in protocols like TLS and VPNs.
+
+### Elliptic Curve Digital Signature Algorithm (ECDSA)
+
+- **Overview**: Uses elliptic curve cryptography to create digital signatures.
+- **Benefits**: Provides enhanced security and efficiency for digital signature generation.
+
+## Internet Key Exchange (IKE)
+
+IKE is a protocol used to establish and maintain secure communication sessions, particularly in VPNs. It combines the Diffie-Hellman algorithm with other cryptographic techniques to securely exchange keys and negotiate security parameters.
+
+### Modes of IKE
+
+- **Main Mode**:
+  - Default mode for IKE, considered more secure.
+  - Performs key exchange in three phases, providing greater flexibility and security.
+  - May result in slower performance due to the number of exchanges.
+
+- **Aggressive Mode**:
+  - Provides faster performance by reducing the number of exchanges to two phases.
+  - Less secure than main mode as it does not protect identities.
+
+### Pre-Shared Keys (PSK)
+
+A Pre-Shared Key is a secret shared between the two parties before the key exchange. It authenticates the parties and establishes a shared secret for encrypting communications.
+
+- **Advantages**:
+  - Adds an extra layer of security by ensuring both parties authenticate each other.
+  
+- **Limitations**:
+  - Securely exchanging the PSK can be challenging.
+  - If compromised, it may lead to security breaches, such as MITM attacks.
+
+## Summary of Algorithms
+
+| Algorithm       | Acronym | Security Characteristics                                 |
+|------------------|---------|--------------------------------------------------------|
+| Diffie-Hellman   | DH      | Relatively secure and computationally efficient        |
+| Rivest–Shamir–Adleman | RSA    | Widely used and secure, but computationally intensive  |
+| Elliptic Curve Diffie-Hellman | ECDH   | Enhanced security and efficiency compared to DH       |
+| Elliptic Curve Digital Signature Algorithm | ECDSA  | Provides enhanced security and efficiency for signatures |
+
+Understanding these key exchange mechanisms is essential for implementing secure communication in various applications and protocols.
+
+
