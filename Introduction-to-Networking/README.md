@@ -1042,3 +1042,44 @@ VoIP allows voice and multimedia communications over broadband connections. Comm
 SIP can expose user information, making it susceptible to attacks. For example, the SIP OPTIONS request can be used to gather details about a server’s capabilities.
 
 This structured overview serves as a foundational reference for understanding common networking protocols. You can expand or modify it further as needed!
+
+
+# Wireless Networks: Overview and Security
+
+## What Are Wireless Networks?
+Wireless networks allow devices like laptops, smartphones, and tablets to connect and communicate without physical cables. They utilize radio frequency (RF) technology to transmit data. Each device has a wireless adapter that converts data into RF signals, which are sent through the air to other devices on the network.
+
+### Types of Wireless Networks
+1. **Wireless Local Area Networks (WLAN)**: Typically used in homes or small offices (e.g., WiFi), with a range of a few hundred feet.
+2. **Wireless Wide Area Networks (WWAN)**: Uses cellular technology (3G, 4G, 5G) for broader coverage, such as cities or regions.
+
+To connect, devices must be within range of a wireless access point (WAP) and configured with the correct network settings (SSID and password).
+
+## WiFi Connection Process
+Connecting to a WiFi network involves several steps governed by the IEEE 802.11 protocol:
+1. **Connection Request**: A device sends a request to the WAP, including its MAC address, SSID, supported data rates, channels, and security protocols.
+2. **WAP Response**: The WAP acknowledges the request, allowing the device to connect.
+3. **Data Transmission**: Once connected, devices can communicate with each other and access the Internet via the WAP.
+
+## Communication and Signal Strength
+WiFi communication typically occurs over the 2.4 GHz or 5 GHz bands. The strength and range of RF signals can be affected by obstacles, interference, and environmental factors. Techniques like spread spectrum transmission and error correction are used to maintain reliable communication.
+
+## Security Features in Wireless Networks
+Wireless networks implement various security measures to protect against unauthorized access and ensure data integrity.
+
+### Key Security Features
+1. **Encryption**: Protects data transmitted over the network. Common protocols include:
+   - **Wired Equivalent Privacy (WEP)**: Outdated and insecure.
+   - **WiFi Protected Access (WPA)**: Offers better security.
+   - **WPA2/WPA3**: Current standards using advanced encryption methods like AES.
+
+2. **Access Control**: Ensures only authorized devices can connect, typically managed through passwords or MAC address filtering.
+
+3. **Firewalls**: Built-in firewalls on routers monitor and control incoming and outgoing network traffic based on security rules.
+
+## Authentication Protocols
+- **Lightweight Extensible Authentication Protocol (LEAP)**: Uses shared keys for authentication.
+- **Protected Extensible Authentication Protocol (PEAP)**: Utilizes secure tunneled authentication with digital certificates.
+
+## Conclusion
+Wireless networks provide flexibility and convenience in connectivity but require robust security measures to protect data and maintain network integrity. Implementing modern encryption standards and authentication protocols is crucial for safeguarding wireless communications.
