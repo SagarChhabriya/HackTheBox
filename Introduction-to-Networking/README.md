@@ -681,3 +681,843 @@ So we know how big each subnet will be. From now on, we start from the network a
 
 | Subnet No. | Network Address      | First Host         | Last Host          | Broadcast Address
 
+
+# MAC Addresses
+
+Each host in a network has its own 48-bit (6 octets) Media Access Control (MAC) address, represented in hexadecimal format. MAC is the physical address for our network interfaces. There are several different standards for the MAC address:
+
+- **Ethernet (IEEE 802.3)**
+- **Bluetooth (IEEE 802.15)**
+- **WLAN (IEEE 802.11)**
+
+This is because the MAC address identifies the physical connection (network card, Bluetooth, or WLAN adapter) of a host. Each network card has its individual MAC address, which is configured once on the manufacturer's hardware side but can always be changed, at least temporarily.
+
+## Example of a MAC Address
+
+### MAC Address: 
+- `DE:AD:BE:EF:13:37`
+- `DE-AD-BE-EF-13-37`
+- `DEAD.BEEF.1337`
+
+### Representation
+| Representation | 1st Octet | 2nd Octet | 3rd Octet | 4th Octet | 5th Octet | 6th Octet |
+|----------------|------------|------------|------------|------------|------------|------------|
+| **Binary**     | 1101 1110  | 1010 1101  | 1011 1110  | 1110 1111  | 0001 0011  | 0011 0111  |
+| **Hex**        | DE         | AD         | BE         | EF         | 13         | 37         |
+
+
+
+# Understanding MAC Addresses and IP Packet Delivery
+
+When an IP packet is delivered, it must be addressed at Layer 2 (Data Link Layer) to the destination host's physical address (MAC address) or to the router/NAT responsible for routing the packet. Each packet contains a sender's address and a destination address.
+
+## MAC Address Structure
+
+A **MAC address** consists of a total of 6 bytes (48 bits). It is divided into two parts:
+
+1. **Organization Unique Identifier (OUI)**: The first half of the MAC address (3 bytes / 24 bits) is called the OUI. It is defined by the Institute of Electrical and Electronics Engineers (IEEE) and is assigned to manufacturers.
+2. **Individual Address Part (NIC)**: The last half (3 bytes) is the unique part assigned by the manufacturer to identify individual devices (Network Interface Controllers or NICs).
+
+### Example MAC Address Representation
+
+For the following MAC address:
+
+
+- **OUI** (first half of the address): `DE:AD:BE`
+- **NIC** (second half of the address): `EF:13:37`
+
+#### OUI Part
+
+| 1st Octet  | 2nd Octet  | 3rd Octet  |
+|------------|------------|------------|
+| **Binary** | 1101 1110  | 1010 1101  | 1011 1110  |
+| **Hex**    | DE         | AD         | BE         |
+
+#### NIC Part
+
+| 4th Octet  | 5th Octet  | 6th Octet  |
+|------------|------------|------------|
+| **Binary** | 1110 1111  | 0001 0011  | 0011 0111  |
+| **Hex**    | EF         | 13         | 37         |
+
+### How MAC Addresses are Used in IP Packet Delivery
+
+- **Same Subnet**: If the target IP address is within the **same subnet**, the IP packet is delivered directly to the destination host’s MAC address.
+- **Different Subnet**: If the target IP address is in a **different subnet**, the packet is sent to the MAC address of the **default gateway** (router). The router then forwards the packet to the next destination.
+
+### Role of ARP (Address Resolution Protocol)
+
+To map an IP address to a MAC address, IPv4 networks use the **Address Resolution Protocol (ARP)**. ARP is used to discover the MAC address associated with a given IP address within a local network.
+
+### Reserved MAC Addresses
+
+Similar to IP addresses, certain MAC address ranges are reserved for specific purposes, such as the **local range** for private use.
+
+---
+
+For more information on MAC addresses and how they function in networking, refer to [IEEE MAC Address Standards](https://standards.ieee.org/products-services/regauth/oui/index.html).
+
+
+# MAC Addresses Explained
+
+Every device on a network has a unique **48-bit Media Access Control (MAC)** address, typically represented in hexadecimal format. Different standards include:
+
+- **Ethernet (IEEE 802.3)**
+- **Bluetooth (IEEE 802.15)**
+- **WLAN (IEEE 802.11)**
+
+Each network card comes with its own MAC address, which can be changed temporarily.
+
+## Example of a MAC Address
+- **Format**: DE:AD:BE:EF:13:37
+- **Hexadecimal**: DE AD BE EF 13 37
+- **Binary**: 11011110 10101101 10111110 11101111 00010011 00110111
+
+### Structure of MAC Address
+- **Organization Unique Identifier (OUI)**: First 3 bytes (assigned to manufacturers).
+- **Individual Address**: Last 3 bytes (assigned by the manufacturer).
+
+## How MAC Addresses Work
+When sending data:
+- **Same Network**: Data goes directly to the target's MAC address.
+- **Different Network**: Data is sent to the MAC address of a router (default gateway).
+
+The **Address Resolution Protocol (ARP)** helps devices find each other by converting IP addresses to MAC addresses.
+
+## Types of MAC Addresses
+1. **Unicast**: One-to-one communication (last bit is 0).
+2. **Multicast**: One-to-many communication (last bit is 1).
+3. **Broadcast**: Sent to all devices (all bits are 1, e.g., FF:FF:FF:FF:FF:FF).
+
+### Address Types
+- **Globally Unique**: Assigned by IEEE.
+- **Locally Administered**: Can be changed by network administrators.
+
+## Security Risks with MAC Addresses
+MAC addresses can be manipulated, leading to security issues:
+- **MAC Spoofing**: Changing a device's MAC address to impersonate another.
+- **MAC Flooding**: Overloading a switch with fake MAC addresses.
+
+## ARP (Address Resolution Protocol)
+ARP helps devices find MAC addresses based on IP addresses:
+1. **ARP Request**: A device asks, "Who has this IP address?"
+2. **ARP Reply**: The device with that IP responds with its MAC address.
+
+## ARP Spoofing
+An attack where false ARP messages link your MAC address with another device’s IP, allowing traffic interception. To protect against ARP spoofing, use secure protocols and implement network security measures like firewalls and intrusion detection systems.
+
+
+
+# IPv6 Addresses
+
+**IPv6** is the successor to **IPv4**, featuring a 128-bit address length. It allows for a much larger address space and provides several advantages over IPv4, such as:
+
+- **Larger Address Space**: Approximately 340 undecillion addresses.
+- **Address Self-Configuration**: Through Stateless Address Autoconfiguration (SLAAC).
+- **Multiple Addresses**: Each interface can have multiple IPv6 addresses.
+- **Faster Routing**: More efficient data handling.
+- **Mandatory IPsec**: For end-to-end encryption.
+- **Larger Data Packages**: Supports packets up to 4 GBytes.
+
+### Key Differences Between IPv4 and IPv6
+
+| Feature                 | IPv4             | IPv6             |
+|-------------------------|------------------|------------------|
+| Bit Length              | 32-bit           | 128-bit          |
+| OSI Layer               | Network Layer     | Network Layer     |
+| Addressing Range        | ~4.3 billion     | ~340 undecillion  |
+| Representation          | Decimal          | Hexadecimal       |
+| Prefix Notation         | 10.10.10.0/24    | fe80::dd80:b1a9:6687:2d3b/64 |
+| Dynamic Addressing      | DHCP             | SLAAC / DHCPv6    |
+| IPsec                   | Optional         | Mandatory         |
+
+### Types of IPv6 Addresses
+
+1. **Unicast**: For a single interface.
+2. **Anycast**: For multiple interfaces; only one receives the packet.
+3. **Multicast**: For multiple interfaces; all receive the same packet.
+4. **Broadcast**: Does not exist; realized using multicast.
+
+### Hexadecimal System
+
+The hexadecimal system is used to make binary representations more readable. It represents 16 states (0-F) with a single character.
+
+| Decimal | Hex | Binary     |
+|---------|-----|------------|
+| 1       | 1   | 0001       |
+| 2       | 2   | 0010       |
+| 3       | 3   | 0011       |
+| 4       | 4   | 0100       |
+| 5       | 5   | 0101       |
+| 6       | 6   | 0110       |
+| 7       | 7   | 0111       |
+| 8       | 8   | 1000       |
+| 9       | 9   | 1001       |
+| 10      | A   | 1010       |
+| 11      | B   | 1011       |
+| 12      | C   | 1100       |
+| 13      | D   | 1101       |
+| 14      | E   | 1110       |
+| 15      | F   | 1111       |
+
+#### Example: IPv4 to Hexadecimal
+For the IPv4 address **192.168.12.160**:
+- **Binary**: 11000000 10101000 00001100 10100000
+- **Hex**: C0 A8 0C A0
+
+### IPv6 Address Representation
+
+An IPv6 address consists of 16 bytes, represented in hexadecimal notation as eight blocks of 16 bits (four hex digits), separated by colons. Leading zeros can be omitted, and consecutive blocks of zeros can be shortened with double colons (::), but this can only be done once.
+
+#### Example IPv6 Address
+- **Full IPv6**: fe80:0000:0000:0000:dd80:b1a9:6687:2d3b/64
+- **Short IPv6**: fe80::dd80:b1a9:6687:2d3b/64
+
+### Parts of an IPv6 Address
+1. **Network Prefix**: Identifies the network, subnet, or address range.
+2. **Interface Identifier**: Formed from the 48-bit MAC address, converted to a 64-bit address.
+
+The default prefix length is **/64**, with common prefixes including **/32**, **/48**, and **/56**.
+
+### RFC 5952 Notation Rules
+- All alphabetical characters are in lower case.
+- Leading zeros of a block are omitted.
+- Consecutive blocks of four zeros are shortened with two colons (::), done only once.
+
+
+# Networking Key Terminology
+
+In the vast field of information technology, understanding key terminology is essential. This guide provides an overview of some of the most common protocols and their descriptions. Note that this list is not exhaustive, and it's beneficial to review and expand it as you learn.
+
+| Protocol                                          | Acronym | Description                                                                                          |
+|---------------------------------------------------|---------|------------------------------------------------------------------------------------------------------|
+| Wired Equivalent Privacy                          | WEP     | A security protocol commonly used to secure wireless networks.                                      |
+| Secure Shell                                      | SSH     | A secure network protocol for logging into and executing commands on remote systems.                |
+| File Transfer Protocol                             | FTP     | A protocol used to transfer files between systems.                                                  |
+| Simple Mail Transfer Protocol                      | SMTP    | A protocol for sending and receiving emails.                                                       |
+| Hypertext Transfer Protocol                        | HTTP    | A client-server protocol for transmitting data over the internet.                                   |
+| Server Message Block                               | SMB     | A protocol for sharing files, printers, and other resources in a network.                          |
+| Network File System                                | NFS     | A protocol for accessing files over a network.                                                     |
+| Simple Network Management Protocol                 | SNMP    | A protocol for managing network devices.                                                            |
+| Wi-Fi Protected Access                             | WPA     | A wireless security protocol that protects networks from unauthorized access.                       |
+| Temporal Key Integrity Protocol                    | TKIP    | A security protocol for wireless networks, considered less secure than WPA.                        |
+| Network Time Protocol                              | NTP     | A protocol for synchronizing the clocks of computers on a network.                                 |
+| Virtual Local Area Network                         | VLAN    | A method for segmenting a network into multiple logical networks.                                   |
+| VLAN Trunking Protocol                             | VTP     | A Layer 2 protocol used to maintain a virtual LAN spanning multiple switches.                       |
+| Routing Information Protocol                       | RIP     | A distance-vector routing protocol used in LANs and WANs.                                          |
+| Open Shortest Path First                           | OSPF    | An interior gateway protocol for routing within a single Autonomous System (AS).                    |
+| Interior Gateway Routing Protocol                  | IGRP    | A Cisco proprietary protocol designed for routing within autonomous systems.                        |
+| Enhanced Interior Gateway Routing Protocol         | EIGRP   | An advanced distance-vector routing protocol for routing IP traffic within a network.               |
+| Pretty Good Privacy                                | PGP     | An encryption program used for securing emails, files, and other data.                             |
+| Network News Transfer Protocol                     | NNTP    | A protocol for distributing and retrieving messages in newsgroups.                                  |
+| Cisco Discovery Protocol                           | CDP     | A proprietary protocol by Cisco for discovering and managing Cisco devices in a network.            |
+| Hot Standby Router Protocol                        | HSRP    | A protocol for providing redundancy in Cisco routers in case of device failure.                     |
+| Virtual Router Redundancy Protocol                 | VRRP    | A protocol for automatically assigning available IP routers to participating hosts.                 |
+| Spanning Tree Protocol                             | STP     | A network protocol for ensuring a loop-free topology in Layer 2 Ethernet networks.                  |
+| Terminal Access Controller Access-Control System   | TACACS  | A protocol providing centralized authentication, authorization, and accounting for network access.  |
+| Session Initiation Protocol                        | SIP     | A signaling protocol for establishing and terminating real-time sessions over an IP network.        |
+| Voice Over IP                                     | VOIP    | Technology allowing telephone calls to be made over the internet.                                   |
+| Extensible Authentication Protocol                 | EAP     | A framework for authentication supporting multiple methods like passwords and digital certificates. |
+| Lightweight Extensible Authentication Protocol      | LEAP    | A proprietary wireless authentication protocol by Cisco, based on EAP.                             |
+| Protected Extensible Authentication Protocol       | PEAP    | A security protocol providing an encrypted tunnel for wireless and other networks.                  |
+| Systems Management Server                          | SMS     | A solution for managing networks, systems, and mobile devices.                                      |
+| Microsoft Baseline Security Analyzer               | MBSA    | A free tool from Microsoft for detecting potential security vulnerabilities in systems.             |
+| Supervisory Control and Data Acquisition           | SCADA   | An industrial control system for monitoring and controlling industrial processes.                    |
+| Virtual Private Network                            | VPN     | Technology allowing users to create a secure, encrypted connection over the internet.               |
+| Internet Protocol Security                         | IPsec   | A protocol for secure communication over a network, commonly used in VPNs.                          |
+| Point-to-Point Tunneling Protocol                  | PPTP    | A protocol for creating a secure, encrypted tunnel for remote access.                              |
+| Network Address Translation                        | NAT     | A technology allowing multiple devices on a private network to connect to the internet via one public IP address. |
+| Carriage Return Line Feed                          | CRLF    | Combines control characters to indicate the end of a line in certain text file formats.            |
+| Asynchronous JavaScript and XML                   | AJAX    | A web development technique for creating dynamic web pages using JavaScript and XML/JSON.          |
+| Internet Server Application Programming Interface   | ISAPI   | Allows creating performance-oriented web extensions for web servers using APIs.                     |
+| Uniform Resource Identifier                        | URI     | A syntax used to identify resources on the Internet.                                               |
+| Uniform Resource Locator                           | URL     | A subset of URI that identifies web pages or resources, including the protocol and domain name.    |
+| Internet Key Exchange                              | IKE     | A protocol for establishing secure connections, used in VPNs for authentication and encryption.     |
+| Generic Routing Encapsulation                      | GRE     | A protocol for encapsulating data transmitted within VPN tunnels.                                   |
+| Remote Shell                                       | RSH     | A Unix program allowing execution of commands on remote computers.                                  |
+
+
+
+# Common Protocols
+
+Internet protocols are standardized rules defined in RFCs (Request for Comments) that specify how devices on a network communicate. They ensure consistent and reliable information exchange, regardless of hardware and software differences. There are two main types of connections used on networks:
+
+- **Transmission Control Protocol (TCP)**: A connection-oriented protocol that establishes a virtual connection before transmitting data.
+- **User Datagram Protocol (UDP)**: A connectionless protocol that sends data packets without establishing a prior connection.
+
+## Transmission Control Protocol (TCP)
+
+TCP establishes a connection using a Three-Way Handshake and maintains it until data transfer is complete. This reliability comes with overhead, making it slower than UDP.
+
+### Key TCP Protocols
+
+| Protocol                                   | Acronym | Port      | Description                                                 |
+|--------------------------------------------|---------|-----------|-------------------------------------------------------------|
+| Telnet                                     | Telnet  | 23        | Remote login service                                        |
+| Secure Shell                               | SSH     | 22        | Secure remote login service                                 |
+| Simple Network Management Protocol         | SNMP    | 161-162   | Manage network devices                                      |
+| Hyper Text Transfer Protocol               | HTTP    | 80        | Used to transfer webpages                                   |
+| Hyper Text Transfer Protocol Secure        | HTTPS   | 443       | Used for secure webpage transfer                            |
+| Domain Name System                         | DNS     | 53        | Lookup domain names                                        |
+| File Transfer Protocol                     | FTP     | 20-21     | Used to transfer files                                      |
+| Trivial File Transfer Protocol             | TFTP    | 69        | Used to transfer files                                      |
+| Network Time Protocol                      | NTP     | 123       | Synchronize computer clocks                                 |
+| Simple Mail Transfer Protocol              | SMTP    | 25        | Used for email transfer                                     |
+| Post Office Protocol                       | POP3    | 110       | Used to retrieve emails                                     |
+| Internet Message Access Protocol           | IMAP    | 143       | Used to access emails                                       |
+| Server Message Block                       | SMB     | 445       | Used to transfer files                                      |
+| Network File System                        | NFS     | 111, 2049 | Used to mount remote systems                                |
+| Bootstrap Protocol                         | BOOTP   | 67, 68    | Used to bootstrap computers                                  |
+| Kerberos                                   | Kerberos| 88        | Used for authentication and authorization                   |
+| Lightweight Directory Access Protocol      | LDAP    | 389       | Used for directory services                                  |
+| Remote Authentication Dial-In User Service | RADIUS  | 1812, 1813| Used for authentication and authorization                   |
+| Dynamic Host Configuration Protocol        | DHCP    | 67, 68    | Used to configure IP addresses                              |
+| Remote Desktop Protocol                    | RDP     | 3389      | Used for remote desktop access                              |
+| Network News Transfer Protocol             | NNTP    | 119       | Used to access newsgroups                                   |
+| Remote Procedure Call                      | RPC     | 135, 137-139| Used to call remote procedures                             |
+| Identification Protocol                    | Ident   | 113       | Used to identify user processes                             |
+| Internet Control Message Protocol          | ICMP    | 0-255     | Used to troubleshoot network issues                          |
+| Internet Group Management Protocol         | IGMP    | 0-255     | Used for multicasting                                       |
+| Internet Key Exchange                      | IKE     | 500       | Used for secure connection establishment                    |
+| Microsoft SQL Server                       | ms-sql-s| 1433      | Used for client connections to Microsoft SQL Server         |
+| Point-to-Point Tunneling Protocol         | PPTP    | 1723      | Used to create VPNs                                        |
+| Secure Copy Protocol                       | SCP     | 22        | Securely copy files between systems                         |
+
+## User Datagram Protocol (UDP)
+
+UDP is a faster but less reliable protocol that sends data packets without establishing a connection. This makes it suitable for applications where speed is more important than reliability.
+
+### Key UDP Protocols
+
+| Protocol                                   | Acronym | Port      | Description                                                 |
+|--------------------------------------------|---------|-----------|-------------------------------------------------------------|
+| Domain Name System                         | DNS     | 53        | Resolves domain names to IP addresses                       |
+| Trivial File Transfer Protocol             | TFTP    | 69        | Used to transfer files                                      |
+| Network Time Protocol                      | NTP     | 123       | Synchronizes clocks in a network                            |
+| Simple Network Management Protocol         | SNMP    | 161       | Monitors and manages network devices                        |
+| Routing Information Protocol               | RIP     | 520       | Exchanges routing information between routers                |
+| Dynamic Host Configuration Protocol        | DHCP    | 67       | Assigns IP addresses dynamically                            |
+| Telnet                                     | TELNET  | 23        | Text-based remote access communication                      |
+| Internet Protocol Security                 | IPsec   | 500       | Provides secure communication, commonly used in VPNs       |
+
+## Internet Control Message Protocol (ICMP)
+
+ICMP is used for error reporting and status information. It facilitates communication between devices for various purposes, including connectivity tests (e.g., ping requests).
+
+### ICMP Requests and Messages
+
+#### Requests
+- **Echo Request**: Tests if a device is reachable (ping).
+- **Timestamp Request**: Determines the time on a remote device.
+- **Address Mask Request**: Requests the subnet mask of a device.
+
+#### Messages
+- **Echo Reply**: Response to an echo request.
+- **Destination Unreachable**: Indicates a packet cannot reach its destination.
+- **Redirect**: Informs a device to send packets to a different router.
+- **Time Exceeded**: Sent when a packet takes too long to reach its destination.
+
+### Time-To-Live (TTL)
+The TTL field limits a packet's lifetime, preventing indefinite circulation. Each router decrements the TTL value, and when it reaches zero, the packet is discarded, triggering a Time Exceeded message.
+
+## Voice over Internet Protocol (VoIP)
+
+VoIP allows voice and multimedia communications over broadband connections. Common applications include Skype and Zoom. The most used ports for VoIP are:
+
+- **SIP (Session Initiation Protocol)**: TCP/5060 and TCP/5061
+- **H.323**: TCP/1720
+
+### Common SIP Methods
+
+| Method    | Description                                     |
+|-----------|-------------------------------------------------|
+| INVITE    | Initiates a session or invites another endpoint.|
+| ACK       | Confirms receipt of an INVITE request.         |
+| BYE       | Terminates a session.                          |
+| CANCEL    | Cancels a pending INVITE request.              |
+| REGISTER  | Registers a SIP user agent with a SIP server.  |
+| OPTIONS   | Requests information about SIP server capabilities.|
+
+### Information Disclosure
+SIP can expose user information, making it susceptible to attacks. For example, the SIP OPTIONS request can be used to gather details about a server’s capabilities.
+
+This structured overview serves as a foundational reference for understanding common networking protocols. You can expand or modify it further as needed!
+
+
+# Wireless Networks: Overview and Security
+
+## What Are Wireless Networks?
+Wireless networks allow devices like laptops, smartphones, and tablets to connect and communicate without physical cables. They utilize radio frequency (RF) technology to transmit data. Each device has a wireless adapter that converts data into RF signals, which are sent through the air to other devices on the network.
+
+### Types of Wireless Networks
+1. **Wireless Local Area Networks (WLAN)**: Typically used in homes or small offices (e.g., WiFi), with a range of a few hundred feet.
+2. **Wireless Wide Area Networks (WWAN)**: Uses cellular technology (3G, 4G, 5G) for broader coverage, such as cities or regions.
+
+To connect, devices must be within range of a wireless access point (WAP) and configured with the correct network settings (SSID and password).
+
+## WiFi Connection Process
+Connecting to a WiFi network involves several steps governed by the IEEE 802.11 protocol:
+1. **Connection Request**: A device sends a request to the WAP, including its MAC address, SSID, supported data rates, channels, and security protocols.
+2. **WAP Response**: The WAP acknowledges the request, allowing the device to connect.
+3. **Data Transmission**: Once connected, devices can communicate with each other and access the Internet via the WAP.
+
+## Communication and Signal Strength
+WiFi communication typically occurs over the 2.4 GHz or 5 GHz bands. The strength and range of RF signals can be affected by obstacles, interference, and environmental factors. Techniques like spread spectrum transmission and error correction are used to maintain reliable communication.
+
+## Security Features in Wireless Networks
+Wireless networks implement various security measures to protect against unauthorized access and ensure data integrity.
+
+### Key Security Features
+1. **Encryption**: Protects data transmitted over the network. Common protocols include:
+   - **Wired Equivalent Privacy (WEP)**: Outdated and insecure.
+   - **WiFi Protected Access (WPA)**: Offers better security.
+   - **WPA2/WPA3**: Current standards using advanced encryption methods like AES.
+
+2. **Access Control**: Ensures only authorized devices can connect, typically managed through passwords or MAC address filtering.
+
+3. **Firewalls**: Built-in firewalls on routers monitor and control incoming and outgoing network traffic based on security rules.
+
+## Authentication Protocols
+- **Lightweight Extensible Authentication Protocol (LEAP)**: Uses shared keys for authentication.
+- **Protected Extensible Authentication Protocol (PEAP)**: Utilizes secure tunneled authentication with digital certificates.
+
+## Conclusion
+Wireless networks provide flexibility and convenience in connectivity but require robust security measures to protect data and maintain network integrity. Implementing modern encryption standards and authentication protocols is crucial for safeguarding wireless communications.
+
+
+
+# Virtual Private Networks (VPN)
+
+## Overview
+A Virtual Private Network (VPN) creates a secure and encrypted connection between a private network and a remote device. This technology allows remote machines to access private network resources securely, providing confidentiality and safe access to internal services.
+
+For example, an administrator can manage internal servers remotely via a VPN, which encrypts the data transfer and assigns a local IP address to the remote device, enabling access to the network.
+
+## Benefits of VPNs
+- **Security**: VPNs encrypt the connection, making it difficult for attackers to intercept sensitive information.
+- **Remote Access**: Employees can access network resources from anywhere with an internet connection, facilitating remote work.
+- **Cost-Effective**: VPNs are generally more affordable than leased lines or dedicated connections, as they utilize the public internet.
+- **Interconnectivity**: VPNs can link multiple remote locations (e.g., branch offices) into a single private network, simplifying resource management.
+
+## Requirements for VPN Operation
+| Requirement       | Description                                                                                  |
+|-------------------|----------------------------------------------------------------------------------------------|
+| **VPN Client**    | Installed on the remote device to establish and maintain a VPN connection (e.g., OpenVPN client). |
+| **VPN Server**    | Accepts VPN connections from clients and routes traffic to the private network.              |
+| **Encryption**     | Utilizes various algorithms (e.g., AES, IPsec) to secure the connection and protect data.  |
+| **Authentication** | VPN server and client must authenticate each other using a shared secret, certificate, etc. |
+
+## VPN Connection Process
+At the TCP/IP layer, VPN connections often use the Encapsulating Security Payload (ESP) protocol to ensure secure data exchange over the public internet.
+
+## Protocols Used in VPNs
+
+### IPsec
+Internet Protocol Security (IPsec) provides encryption and authentication for internet communications by encrypting data payloads and adding authentication headers.
+
+- **Protocols**:
+  - **Authentication Header (AH)**: Ensures packet integrity and authenticity without encryption.
+  - **Encapsulating Security Payload (ESP)**: Encrypts data payloads and can include authentication.
+
+- **Modes**:
+  - **Transport Mode**: Encrypts and authenticates only the data payload, used for end-to-end communications.
+  - **Tunnel Mode**: Encrypts the entire IP packet, including the header, commonly used for creating VPN tunnels.
+
+#### Required Protocols for IPsec
+| Protocol          | Port     | Description                                                                                   |
+|-------------------|----------|-----------------------------------------------------------------------------------------------|
+| **Internet Protocol (IP)** | UDP/50-51 | Provides routing for packets between VPN client and server.                                  |
+| **Internet Key Exchange (IKE)** | UDP/500   | Establishes secure communication and negotiates shared secret keys for encryption.            |
+| **Encapsulating Security Payload (ESP)** | UDP/4500  | Encrypts VPN traffic between client and server using negotiated keys.                          |
+
+### PPTP
+Point-to-Point Tunneling Protocol (PPTP) establishes secure tunnels for VPNs but is no longer considered secure due to vulnerabilities. It has been largely replaced by more secure protocols like L2TP/IPsec and OpenVPN.
+
+- **Vulnerabilities**: PPTP's reliance on MSCHAPv2 and outdated DES encryption makes it susceptible to attacks, leading to its decline in use since 2012.
+
+## Conclusion
+VPNs are essential for providing secure remote access to private networks. While older protocols like PPTP have fallen out of favor due to security concerns, more robust options like IPsec and OpenVPN are widely recommended for ensuring secure communications over the internet.
+
+
+
+# Cisco IOS and VLANs
+
+## Cisco IOS Overview
+
+Cisco IOS is the operating system used in Cisco network devices like routers and switches. It helps manage and operate these devices, offering various features important for modern networks, such as:
+
+- **Support for IPv6**
+- **Quality of Service (QoS)**
+- **Security features** (like encryption and authentication)
+- **Virtualization** (such as VPLS and VRF)
+
+### Management Methods
+
+Cisco IOS can be managed through:
+
+- **Command Line Interface (CLI)**: The most common way to configure devices.
+- **Graphical User Interface (GUI)**: A visual way to manage devices.
+
+### Supported Protocols and Services
+
+Cisco IOS supports several protocols and services essential for network operations:
+
+| Protocol Type             | Description                                                                                   |
+|---------------------------|-----------------------------------------------------------------------------------------------|
+| **Routing Protocols**     | Used to route data packets (e.g., OSPF, BGP).                                               |
+| **Switching Protocols**   | Helps manage switches (e.g., VTP, STP).                                                     |
+| **Network Services**      | Automates IP address assignments (e.g., DHCP).                                              |
+| **Security Features**     | Controls access to resources (e.g., Access Control Lists - ACLs).                           |
+
+### Password Types in Cisco IOS
+
+Different passwords are used for various access levels:
+
+| Password Type       | Description                                                                  |
+|---------------------|------------------------------------------------------------------------------|
+| **User**            | Used to log in to Cisco IOS.                                               |
+| **Enable Password** | Allows entry into "enable" mode for advanced functions.                    |
+| **Secret**          | Secures access to certain functions.                                        |
+| **Enable Secret**   | An extra-secure password for "enable" mode, stored encrypted.              |
+
+## VLANs: Virtual Local Area Networks
+
+### What is a VLAN?
+
+A VLAN is a way to logically group devices connected to a switch, creating separate broadcast domains. This means a broadcast from one VLAN won’t affect devices in another VLAN.
+
+#### Benefits of VLANs
+
+1. **Better Organization**: Group devices by department or function.
+2. **Increased Security**: Prevent unauthorized access to other VLANs.
+3. **Simplified Administration**: Manage devices without considering their physical location.
+4. **Improved Performance**: Reduces broadcast traffic, freeing up bandwidth.
+
+### VLAN Setup for Departments
+
+Here’s an example of how a network can be segmented by department:
+
+| Department | VLAN ID | Subnet              |
+|------------|---------|---------------------|
+| Servers    | VLAN 10 | 192.168.1.0/24      |
+| C-Level    | VLAN 20 | 192.168.2.0/24      |
+| Finance    | VLAN 30 | 192.168.3.0/24      |
+| HR         | VLAN 40 | 192.168.4.0/24      |
+| Marketing   | VLAN 50 | 192.168.5.0/24      |
+| Support    | VLAN 60 | 192.168.6.0/24      |
+
+### VLAN Membership
+
+VLANs can be assigned in two ways:
+
+- **Static VLANs**: Manually assigned to each port. More secure but requires manual configuration.
+- **Dynamic VLANs**: Automatically assigned based on MAC addresses. More flexible but less secure.
+
+### Access and Trunk Ports
+
+- **Access Ports**: Carry traffic for only one VLAN. Any traffic coming in is assumed to belong to that VLAN.
+- **Trunk Ports**: Can carry traffic for multiple VLANs. Used to connect switches and routers.
+
+### VLAN Identification
+
+Standard Ethernet frames do not include VLAN information, so two main trunking methods are used to keep track of VLAN data:
+
+- **Inter-Switch Link (ISL)**: An older Cisco protocol that is now deprecated.
+- **IEEE 802.1Q**: A widely used standard that adds VLAN tags to Ethernet frames.
+
+By understanding these concepts, network administrators can effectively manage VLANs and enhance network performance and security.
+
+![image](https://github.com/user-attachments/assets/bc07c945-f33a-48e7-8eb3-da5cad919159)
+
+
+# VLAN Tagging and NIC Configuration
+
+## Tag Protocol Identifier (TPID) and Tag Control Information (TCI)
+
+- **TPID**: A 16-bit field always set to `0x8100` that identifies an Ethernet frame as an 802.1Q-tagged frame.
+- **TCI**: A 16-bit field containing:
+  - **Priority Code Point (PCP)**
+  - **Drop Eligible Indicator (DEI)** (previously known as Canonical Format Indicator - CFI)
+  - **VLAN Identifier (VID)**: The most important part for VLANs, occupying the low-order 12 bits. 
+
+Since VID is 12 bits, it allows for \(2^{12} - 2 = 4096\) VLAN IDs (0 and 4095 are reserved), which means an 802.1Q-tagged frame can represent up to 4094 VLANs. The practice of inserting multiple 802.1Q tags within a single packet is called **Double Tagging**, introduced by 802.1ad.
+
+### VLAN Tagging and Untagging
+
+- **VLAN Tagging**: Inserting VLAN information into an 802.1Q Ethernet header.
+- **VLAN Untagging**: Removing VLAN information from an 802.1Q-tagged Ethernet frame and forwarding the packet to the appropriate destination ports.
+
+## VLAN-Capable NICs
+
+Some network interface cards (NICs) support VLAN tagging, allowing you to assign VLAN IDs to them.
+
+### Assigning a VLAN ID to a NIC in Linux
+
+In Linux, creating a VLAN is done by creating an interface on top of another, called a parent interface. This VLAN interface will tag packets with the assigned VLAN ID, while returning packets will be untagged.
+
+#### Steps to Assign a VLAN ID in Linux
+
+[Read Here](https://academy.hackthebox.com/module/34/section/1878)
+
+
+# Key Exchange Mechanisms
+
+Key exchange methods are used to securely exchange cryptographic keys between two parties. This is crucial in many cryptographic protocols, as the security of encryption depends on keeping these keys secret. Different key exchange methods have unique characteristics and levels of security, and the choice of method depends on the specific circumstances and requirements of the situation.
+
+## Common Key Exchange Methods
+
+### Diffie-Hellman (DH)
+
+- **Overview**: Allows two parties to agree on a shared secret key without prior communication or shared information.
+- **Use**: Commonly used in establishing secure communication channels, such as in the TLS protocol.
+- **Limitations**:
+  - Vulnerable to Man-in-the-Middle (MITM) attacks, where an attacker intercepts and alters communications.
+  - Requires significant CPU power to generate keys, making it less suitable for low-power devices.
+
+### Rivest–Shamir–Adleman (RSA)
+
+- **Overview**: Uses large prime numbers to generate a shared secret key.
+- **Security**: Relies on the difficulty of factoring the product of two large primes.
+- **Applications**:
+  - Encrypting and signing messages for confidentiality and authentication.
+  - Protecting data in transit (e.g., SSL/TLS).
+  - Generating and verifying digital signatures.
+  - Authenticating users and devices (e.g., Kerberos).
+
+### Elliptic Curve Diffie-Hellman (ECDH)
+
+- **Overview**: A variant of Diffie-Hellman that uses elliptic curve cryptography.
+- **Advantages**:
+  - More efficient and secure than traditional Diffie-Hellman.
+  - Supports forward secrecy, ensuring past communications remain secure even if keys are compromised.
+  - Used in protocols like TLS and VPNs.
+
+### Elliptic Curve Digital Signature Algorithm (ECDSA)
+
+- **Overview**: Uses elliptic curve cryptography to create digital signatures.
+- **Benefits**: Provides enhanced security and efficiency for digital signature generation.
+
+## Internet Key Exchange (IKE)
+
+IKE is a protocol used to establish and maintain secure communication sessions, particularly in VPNs. It combines the Diffie-Hellman algorithm with other cryptographic techniques to securely exchange keys and negotiate security parameters.
+
+### Modes of IKE
+
+- **Main Mode**:
+  - Default mode for IKE, considered more secure.
+  - Performs key exchange in three phases, providing greater flexibility and security.
+  - May result in slower performance due to the number of exchanges.
+
+- **Aggressive Mode**:
+  - Provides faster performance by reducing the number of exchanges to two phases.
+  - Less secure than main mode as it does not protect identities.
+
+### Pre-Shared Keys (PSK)
+
+A Pre-Shared Key is a secret shared between the two parties before the key exchange. It authenticates the parties and establishes a shared secret for encrypting communications.
+
+- **Advantages**:
+  - Adds an extra layer of security by ensuring both parties authenticate each other.
+  
+- **Limitations**:
+  - Securely exchanging the PSK can be challenging.
+  - If compromised, it may lead to security breaches, such as MITM attacks.
+
+## Summary of Algorithms
+
+| Algorithm       | Acronym | Security Characteristics                                 |
+|------------------|---------|--------------------------------------------------------|
+| Diffie-Hellman   | DH      | Relatively secure and computationally efficient        |
+| Rivest–Shamir–Adleman | RSA    | Widely used and secure, but computationally intensive  |
+| Elliptic Curve Diffie-Hellman | ECDH   | Enhanced security and efficiency compared to DH       |
+| Elliptic Curve Digital Signature Algorithm | ECDSA  | Provides enhanced security and efficiency for signatures |
+
+Understanding these key exchange mechanisms is essential for implementing secure communication in various applications and protocols.
+
+
+
+
+# Authentication Protocols
+
+Authentication protocols are essential in networking for verifying the identities of users, devices, and other entities. These protocols provide a secure and standardized way to ensure that only authorized entities can access network resources, helping to prevent unauthorized access and other security threats.
+
+Authentication protocols also facilitate the secure exchange of information, which is vital for maintaining the confidentiality and integrity of sensitive data. Below are some commonly used authentication protocols:
+
+## Common Authentication Protocols
+
+| Protocol | Description |
+|----------|-------------|
+| **Kerberos** | A Key Distribution Center (KDC) based authentication protocol that uses tickets in domain environments. |
+| **SRP** | A password-based authentication protocol that protects against eavesdropping and man-in-the-middle attacks using cryptography. |
+| **SSL** | A cryptographic protocol for secure communication over a computer network. |
+| **TLS** | The successor to SSL, providing secure communication over the internet. |
+| **OAuth** | An open standard for authorization that allows users to grant third-party access to their resources without sharing passwords. |
+| **OpenID** | A decentralized authentication protocol allowing users to sign in to multiple websites with a single identity. |
+| **SAML** | Security Assertion Markup Language is an XML-based standard for securely exchanging authentication and authorization data. |
+| **2FA** | An authentication method using two different factors to verify a user's identity. |
+| **FIDO** | The Fast IDentity Online Alliance develops open standards for strong authentication. |
+| **PKI** | A system for securely exchanging information based on public and private key cryptography. |
+| **SSO** | Single Sign-On allows a user to access multiple applications with a single set of credentials. |
+| **MFA** | Multi-Factor Authentication uses multiple factors (knowledge, possession, inherence) to verify identity. |
+| **PAP** | A simple protocol that sends passwords in clear text over the network. |
+| **CHAP** | Uses a three-way handshake to verify a user's identity. |
+| **EAP** | A framework supporting multiple authentication methods, allowing various technologies for user identity verification. |
+| **SSH** | A network protocol for secure communication, used for remote access and file transfer, employing encryption for protection. |
+| **HTTPS** | A secure version of HTTP that uses SSL/TLS for encryption and authentication. |
+| **LEAP** | A Cisco wireless authentication protocol that uses EAP for mutual authentication, vulnerable to dictionary attacks. |
+| **PEAP** | A secure tunneling protocol based on EAP, using TLS to encrypt communication and providing robust authentication methods. |
+
+## Comparison of LEAP and PEAP
+
+- **LEAP**: 
+  - Developed by Cisco for wireless authentication.
+  - Uses the RC4 encryption algorithm.
+  - Vulnerable to dictionary attacks and has largely been replaced by more secure protocols.
+
+- **PEAP**:
+  - Provides secure authentication using TLS for encryption.
+  - Supports server-side certificates for server authentication.
+  - Offers stronger encryption algorithms (e.g., AES, 3DES) and is widely used in enterprise networks.
+
+While protocols like SSH and HTTPS utilize SSL/TLS for secure authentication, they provide robust encryption to protect authentication data from interception and tampering. Both protocols support digital certificates and Public Key Infrastructure (PKI) for server authentication, helping prevent Man-in-the-Middle (MITM) attacks.
+
+Overall, understanding these authentication protocols is crucial for implementing secure systems and protecting sensitive information in various networking environments.
+
+
+# TCP/UDP Connections
+
+**Transmission Control Protocol (TCP)** and **User Datagram Protocol (UDP)** are two fundamental protocols used for data transmission over the Internet. Each serves distinct purposes, with TCP primarily used for reliable data transfer (e.g., web pages, emails) and UDP employed for real-time data delivery (e.g., streaming video, online gaming).
+
+## TCP vs. UDP
+
+### TCP (Transmission Control Protocol)
+- **Connection-Oriented**: Establishes a connection before data is sent, akin to a phone call where both parties are connected until the conversation ends.
+- **Reliability**: Ensures that all data sent is received correctly. If an error occurs, the receiver will notify the sender to resend the missing data.
+- **Flow Control**: Manages data flow to prevent overwhelming the receiver, contributing to a slower but more reliable transmission.
+
+### UDP (User Datagram Protocol)
+- **Connectionless**: Does not establish a connection before sending data; instead, it sends data directly to the target host without verifying its receipt.
+- **Speed**: Prioritizes speed over reliability, making it suitable for applications where timely delivery is crucial, such as live streaming or gaming.
+- **Loss Tolerance**: Accepts potential data loss, as there are no acknowledgments for received packets.
+
+## IP Packet Structure
+
+An **IP packet** is the basic unit of data sent over a network, containing a header and a payload.
+
+### IP Header
+
+The IP header includes several fields that provide critical information for routing and delivery:
+
+| Field                    | Description                                                                 |
+|--------------------------|-----------------------------------------------------------------------------|
+| **Version**              | Indicates the IP protocol version (IPv4 or IPv6).                         |
+| **Internet Header Length**| Specifies the header length in 32-bit words.                              |
+| **Class of Service**     | Indicates the priority of the packet.                                      |
+| **Total Length**         | Specifies the total packet length in bytes.                                |
+| **Identification (ID)**  | Identifies fragments of the packet if fragmented.                          |
+| **Flags**                | Indicates fragmentation status.                                            |
+| **Fragment Offset**      | Shows the position of the fragment within the original packet.             |
+| **Time to Live (TTL)**   | Limits the packet's lifespan to prevent endless circulation.               |
+| **Protocol**             | Specifies the upper-layer protocol (TCP, UDP, etc.).                       |
+| **Checksum**             | Used for error-checking the header.                                       |
+| **Source/Destination IP**| Indicates the sender and recipient IP addresses.                           |
+| **Options**              | Contains optional routing information.                                     |
+| **Padding**              | Pads the packet to ensure a full word length.                             |
+
+## IP Record-Route Field
+
+The **Record-Route** field records the path taken by the packet through the network. It lists the IP addresses of all routers the packet passed through when it reaches the destination. This can be observed using tools like `ping` with the `-R` option.
+
+Example of ping output:
+```bash
+PING 10.129.143.158 (10.129.143.158) 56(124) bytes of data:
+
+64 bytes from 10.129.143.158:
+- ICMP Sequence: 1
+- TTL: 63
+- Time: 11.7 ms
+
+Record Route:
+- 10.10.14.38
+- 10.129.0.1
+- 10.129.143.158
+- 10.10.14.1
+
+```
+
+This output indicates the route taken by the packet, helping in troubleshooting and analyzing network paths.
+
+## Traceroute
+
+**Traceroute** is a diagnostic tool that tracks the path packets take to reach a destination. It operates by sending TCP SYN packets with increasing TTL values to identify each hop along the route. When a packet's TTL reaches zero at a router, an ICMP Time-Exceeded message is returned, revealing the router's IP address.
+
+### Process:
+1. Send a TCP SYN packet with TTL = 1.
+2. The router decrements TTL, dropping the packet and returning an ICMP Time-Exceeded.
+3. Record the router's IP address.
+4. Repeat with TTL incremented until the destination is reached.
+
+## IP Payload
+
+The **payload** of an IP packet contains the actual data being transmitted. For both TCP and UDP, this payload varies based on the protocol:
+
+### TCP Payload
+- **TCP Segments**: Composed of headers and payloads, with headers containing fields like source and destination ports, sequence numbers, acknowledgment numbers, and control flags.
+  
+### UDP Payload
+- **UDP Datagrams**: Sent without establishing a connection, focusing on direct delivery without overhead for reliability checks.
+
+## Blind Spoofing
+
+**Blind spoofing** is an attack where an attacker sends falsified packets without seeing the responses. This involves manipulating the IP header to indicate false source and destination addresses, potentially allowing the attacker to disrupt connections or intercept information. For instance, sending a TCP packet with a false Initial Sequence Number (ISN) can trick the target into establishing a connection without valid authentication.
+
+---
+
+Understanding TCP/UDP connections and the structure of IP packets is crucial for network management, troubleshooting, and security practices. By leveraging these protocols effectively, network administrators can ensure reliable data transmission and robust network performance.
+
+
+
+# Cryptography
+
+Cryptography is essential for securely transmitting data over the Internet, such as payment information, emails, and personal data. It transforms data into an unreadable format for unauthorized users through various mathematical algorithms. Encryption methods can be classified into two main categories: **symmetric** and **asymmetric** encryption.
+
+## Symmetric Encryption
+
+- **Definition**: Uses the same key for both encryption and decryption.
+- **Key Management**: The sender and receiver must securely share and manage the same key. If the key is compromised, the data's security is at risk.
+- **Common Algorithms**: 
+  - **Advanced Encryption Standard (AES)**: Currently considered the most secure symmetric algorithm.
+  - **Data Encryption Standard (DES)**: An older algorithm with a 56-bit key length, now deemed insecure for many applications.
+- **Use Cases**: Often used for encrypting large amounts of data, such as files on a hard drive or data sent over networks.
+
+## Asymmetric Encryption
+
+- **Definition**: Uses a pair of keys—public and private keys.
+- **Functionality**: The public key encrypts data, while the private key decrypts it. This allows anyone to send encrypted data to the key owner without needing to share the private key.
+- **Examples**: 
+  - **RSA** (Rivest–Shamir–Adleman)
+  - **PGP** (Pretty Good Privacy)
+  - **ECC** (Elliptic Curve Cryptography)
+- **Advantages**: Enhanced security based on complex mathematical problems, and eliminates the need for key exchange.
+
+## Key Encryption Standards
+
+- **Data Encryption Standard (DES)**: A symmetric-key block cipher that uses a 56-bit key for encryption. Due to vulnerabilities, it has largely been replaced by more secure algorithms.
+- **Triple DES (3DES)**: An extension of DES that applies encryption three times, enhancing security but still limited by the 56-bit key length.
+- **Advanced Encryption Standard (AES)**: A successor to DES, supporting key lengths of 128, 192, or 256 bits. AES is faster and more secure, widely used in applications like:
+  - **WLAN IEEE 802.11i**
+  - **IPsec**
+  - **SSH**
+
+## Cipher Modes
+
+Cipher modes define how a block cipher processes data. Common modes include:
+
+- **Electronic Code Book (ECB)**: Not recommended due to security vulnerabilities and inability to hide data patterns effectively.
+- **Cipher Block Chaining (CBC)**: Default mode for AES; commonly used in disk encryption and secure communications (e.g., TLS).
+- **Cipher Feedback (CFB)**: Suitable for real-time data encryption, such as network communications.
+- **Output Feedback (OFB)**: Similar to CFB but generates a keystream that improves security for real-time communication.
+- **Counter (CTR)**: Used for real-time data streams; efficient for high-speed encryption tasks.
+- **Galois/Counter (GCM)**: Provides both confidentiality and integrity, used in secure communications like VPNs.
+
+Each encryption mode has specific characteristics and applications, and the choice depends on the security requirements of the task at hand.
